@@ -1,0 +1,30 @@
+{
+   "name": "E-com",
+   "version": "1.0.0",
+   "description": "",
+   "main": "server.js",
+   "type": "module",
+   "scripts": {
+      "start": "node back-end/server",
+      "backend": "nodemon back-end/server",
+      "frontend": "npm start -prefix front-end",
+      "dev": "concurrently \"npm run backend\" \"npm run frontend\" ",
+      "insert": "node back-end/seeder.js",
+      "clear": "node back-end/seeder.js -c"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "colors": "^1.4.0",
+      "dotenv": "^8.2.0",
+      "express": "^4.17.1",
+      "express-async-handler": "^1.1.4",
+      "mongoose": "^5.10.9"
+   },
+   "devDependencies": {
+      "concurrently": "^5.3.0",
+      "nodemon": "^2.0.4"
+   }
+}

@@ -1,0 +1,14 @@
+            Follow this for a week and you will know how long is it gonna take and accordingly make a target plan or completion plan
+
+1. Skills Demonstrable Project(Portfolio Project)
+2. Build it completely and Finish it
+3. Make your own front-end design and looks 
+4. Populate it with a lot of data(Project should look filled and packed )
+5. Make it micro-service architecture based
+6. (if possible) Use mmysql with java as one micro-service for retrieving data from data base
+7. work at night too..do not procastinate
+8. Maintain a great github repo/Project for this one
+9. Maintain your own style of naming for project files and variables and functions
+
+                Work on this project in the morning and night
+                During day time work on data structure and algorithm(JAVA) and update the github repo
