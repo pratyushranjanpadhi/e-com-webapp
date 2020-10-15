@@ -19,11 +19,11 @@ function HomeScreen() {
          {loading ? (
             <Loader />
          ) : error ? (
-            <Message message={error} />
+            <Message>{error}</Message>
          ) : (
             <Row>
                {products.map((product) => (
-                  <Col sm={12} md={6} lg={3}>
+                  <Col key={product._id} sm={12} md={6} lg={3}>
                      <Product product={product} />
                   </Col>
                ))}
