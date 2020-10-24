@@ -17,7 +17,7 @@ const auth = asyncHandler(async (req, res, next) => {
    }
    if (!token) {
       res.status(401);
-      throw new Error("token not found, not authorized");
+      throw new Error("Token not found, not authorized");
    }
 });
 
