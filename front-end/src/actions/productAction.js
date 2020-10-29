@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "../actionTypes";
 
-export const listProduct = () => async (dispatch) => {
+const listProduct = () => async (dispatch) => {
    try {
       dispatch({ type: actionTypes.PRODUCT_LIST_REQUEST });
 
@@ -15,7 +15,7 @@ export const listProduct = () => async (dispatch) => {
    }
 };
 
-export const listProductDetails = (id) => async (dispatch) => {
+const listProductDetails = (id) => async (dispatch) => {
    try {
       dispatch({ type: actionTypes.PRODUCT_DETAILS_REQUEST });
 
@@ -28,3 +28,5 @@ export const listProductDetails = (id) => async (dispatch) => {
       });
    }
 };
+
+export { listProduct, listProductDetails };

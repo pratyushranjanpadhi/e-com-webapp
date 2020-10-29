@@ -3,6 +3,7 @@ import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 
+//User Authentication
 const authUser = asyncHandler(async (req, res) => {
    const { email, password } = req.body;
    const user = await User.findOne({ email });
@@ -19,6 +20,7 @@ const authUser = asyncHandler(async (req, res) => {
    }
 });
 
+//User Registration
 const registerUser = asyncHandler(async (req, res) => {
    const { name, email, password } = req.body;
 
@@ -48,6 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
    }
 });
 
+//Get the User Profile
 const getUserProfile = asyncHandler(async (req, res) => {
    const user = await User.findById(req.user._id);
    if (user) {
@@ -62,4 +65,25 @@ const getUserProfile = asyncHandler(async (req, res) => {
    }
 });
 
-export { authUser, registerUser, getUserProfile };
+//Update the user Profile
+const updateUserProfile = asyncHandler(async (req, res) => {
+   const user = await User.findById(req.user._id);
+   if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+      if (req.user.password) {
+         user.password = req.user.password;
+      }
+
+      const updatedUser = await user.save();
+      res.json({
+         id: updatedUser._id,
+         name: updatedUser.name,
+         email: updatedUser.email,
+         isAdmin: updatedUser.isAdmin,
+         token: generateToken(updatedUser._id),
+      });
+   }
+});
+
+export { authUser, registerUser, getUserProfile, updateUserProfile };
