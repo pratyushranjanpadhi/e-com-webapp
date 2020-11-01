@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Row, Col } from "react-bootstrap";
-import { login, register } from "../actions/userActions";
-import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
@@ -58,7 +55,7 @@ const ProfileScreen = ({ location, history }) => {
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                <Form.Group controlId="name">
-                  <Form.Label>Email Address</Form.Label>
+                  <Form.Label>Name</Form.Label>
                   <Form.Control
                      placeholder="Enter Name"
                      value={name}

@@ -1,6 +1,5 @@
 import * as actionTypes from "../actionTypes";
 
-// User Login and Logout Reducer
 const userLoginReducer = (state = {}, action) => {
    switch (action.type) {
       case actionTypes.USER_LOGIN_REQUEST:
@@ -16,7 +15,6 @@ const userLoginReducer = (state = {}, action) => {
    }
 };
 
-// User Register Reducer
 const userRegisterReducer = (state = {}, action) => {
    switch (action.type) {
       case actionTypes.USER_REGISTER_REQUEST:
@@ -38,7 +36,6 @@ const userRegisterReducer = (state = {}, action) => {
    }
 };
 
-//get the user details from on profile click
 const userDetailsReducer = (state = { user: {} }, action) => {
    switch (action.type) {
       case actionTypes.USER_DETAILS_REQUEST:
