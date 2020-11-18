@@ -12,9 +12,7 @@ function LoginScreen({ location, history }) {
    const [password, setPassword] = useState("");
    const dispatch = useDispatch();
    const userLogin = useSelector((state) => state.userLogin);
-   console.log(userLogin);
    const { loading, error, userInfo } = userLogin;
-   console.log(userInfo);
    const redirect = location.search ? location.search.split("=")[1] : "/";
 
    useEffect(() => {
