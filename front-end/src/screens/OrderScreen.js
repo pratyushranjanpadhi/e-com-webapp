@@ -27,7 +27,7 @@ const OrderScreen = ({ match }) => {
          script.type = "text/javascript";
          script.async = true;
          script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-         script.onLoad = () => setIsSdkReady(true);
+         script.onload = () => setIsSdkReady(true);
          document.body.appendChild(script);
       };
 
@@ -41,9 +41,10 @@ const OrderScreen = ({ match }) => {
             setIsSdkReady(true);
          }
       }
-   }, [dispatch, orderId, order]);
+   }, [dispatch, orderId, order, paySuccess]);
 
    const paymentSuccessHandler = (paymentResult) => {
+      console.log(paymentResult);
       dispatch(payOrder(orderId, paymentResult));
    };
 

@@ -30,10 +30,16 @@ const login = (email, password) => async (dispatch) => {
 
 //logout Action
 const logout = () => async (dispatch) => {
+   localStorage.removeItem("userInfo");
    dispatch({
       type: actionTypes.USER_LOGOUT,
    });
-   localStorage.removeItem("userInfo");
+   dispatch({
+      type: actionTypes.USER_DETAILS_RESET,
+   });
+   dispatch({
+      type: actionTypes.MY_ORDER_LIST_RESET,
+   });
 };
 
 //Register Action
