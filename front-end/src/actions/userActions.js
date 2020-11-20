@@ -40,6 +40,9 @@ const logout = () => async (dispatch) => {
    dispatch({
       type: actionTypes.MY_ORDER_LIST_RESET,
    });
+   dispatch({
+      type: actionTypes.USER_LIST_RESET,
+   });
 };
 
 //Register Action
@@ -135,4 +138,32 @@ const updateUserProfile = (user) => async (dispatch, getState) => {
    }
 };
 
-export { login, logout, register, getUserDetails, updateUserProfile };
+const listUsers = () => async (dispatch, getState) => {
+   try {
+      dispatch({
+         type: actionTypes.USER_LIST_REQUEST,
+      });
+      const {
+         userLogin: { userInfo },
+      } = getState();
+
+      //Using this for authorization : sending the header
+      const config = {
+         headers: {
+            Authorization: `Bearer ${userInfo.token}`, //using the token here
+         },
+      };
+      const { data } = await axios.get(`/api/users`, config);
+      dispatch({
+         type: actionTypes.USER_LIST_SUCCESS,
+         payload: data,
+      });
+   } catch (error) {
+      dispatch({
+         type: actionTypes.USER_LIST_FAIL,
+         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+      });
+   }
+};
+
+export { login, logout, register, getUserDetails, updateUserProfile, listUsers };
