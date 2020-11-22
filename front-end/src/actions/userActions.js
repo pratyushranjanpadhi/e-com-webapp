@@ -166,4 +166,31 @@ const listUsers = () => async (dispatch, getState) => {
    }
 };
 
-export { login, logout, register, getUserDetails, updateUserProfile, listUsers };
+const deleteUser = (id) => async (dispatch, getState) => {
+   try {
+      dispatch({
+         type: actionTypes.USER_DELETE_REQUEST,
+      });
+      const {
+         userLogin: { userInfo },
+      } = getState();
+
+      //Using this for authorization : sending the header
+      const config = {
+         headers: {
+            Authorization: `Bearer ${userInfo.token}`, //using the token here
+         },
+      };
+      const { data } = await axios.delete(`/api/users/${id}`, config);
+      dispatch({
+         type: actionTypes.USER_DELETE_SUCCESS,
+      });
+   } catch (error) {
+      dispatch({
+         type: actionTypes.USER_DELETE_FAIL,
+         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+      });
+   }
+};
+
+export { login, logout, register, getUserDetails, updateUserProfile, listUsers, deleteUser };

@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { listUsers } from "../actions/userActions";
+import { listUsers, deleteUser } from "../actions/userActions";
 
 const UserListScreen = ({ history }) => {
    const dispatch = useDispatch();
@@ -12,6 +12,8 @@ const UserListScreen = ({ history }) => {
    const { loading, error, users } = userList;
    const userLogin = useSelector((state) => state.userLogin);
    const { userInfo } = userLogin;
+   const userDelete = useSelector((state) => state.userDelete);
+   const { loading: deleteLoading, success: deleteSuccess, error: deleteError } = userDelete;
 
    useEffect(() => {
       if (userInfo && userInfo.isAdmin) {
@@ -19,10 +21,12 @@ const UserListScreen = ({ history }) => {
       } else {
          history.push("/login");
       }
-   }, [dispatch, history, userInfo]);
+   }, [dispatch, history, userInfo, deleteSuccess]);
 
-   const deleteHandler = () => {
-      console.log("delete handler");
+   const deleteHandler = (id) => {
+      if (window.confirm("Are you sure")) {
+         dispatch(deleteUser(id));
+      }
    };
    return (
       <>

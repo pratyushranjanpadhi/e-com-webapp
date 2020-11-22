@@ -97,4 +97,17 @@ const userListReducer = (state = { users: [] }, action) => {
    }
 };
 
-export { userLoginReducer, userRegisterReducer, userDetailsReducer, userProfileUpdateReducer, userListReducer };
+const userDeleteReducer = (state = {}, action) => {
+   switch (action.type) {
+      case actionTypes.USER_DELETE_REQUEST:
+         return { loading: true };
+      case actionTypes.USER_DELETE_SUCCESS:
+         return { loading: false, success: true };
+      case actionTypes.USER_DELETE_FAIL:
+         return { loading: false, error: action.payload };
+      default:
+         return state;
+   }
+};
+
+export { userLoginReducer, userRegisterReducer, userDetailsReducer, userProfileUpdateReducer, userListReducer, userDeleteReducer };
