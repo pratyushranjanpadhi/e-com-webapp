@@ -110,4 +110,19 @@ const userDeleteReducer = (state = {}, action) => {
    }
 };
 
-export { userLoginReducer, userRegisterReducer, userDetailsReducer, userProfileUpdateReducer, userListReducer, userDeleteReducer };
+const userUpdateReducer = (state = { user: {} }, action) => {
+   switch (action.type) {
+      case actionTypes.USER_UPDATE_REQUEST:
+         return { loading: true };
+      case actionTypes.USER_UPDATE_SUCCESS:
+         return { loading: false, success: true };
+      case actionTypes.USER_UPDATE_FAIL:
+         return { loading: false, error: action.payload };
+      case actionTypes.USER_UPDATE_RESET:
+         return { user: {} };
+      default:
+         return state;
+   }
+};
+
+export { userLoginReducer, userRegisterReducer, userDetailsReducer, userProfileUpdateReducer, userListReducer, userDeleteReducer, userUpdateReducer };

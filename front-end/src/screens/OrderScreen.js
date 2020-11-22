@@ -135,6 +135,7 @@ const OrderScreen = ({ match }) => {
                      {!order.isPaid && (
                         <ListGroup.Item>
                            {payLoading && <Loader />}
+                           {payError && <Message>{payError}</Message>}
                            {!isSdkReady ? <Loader /> : <PayPalButton amount={order.totalPrice} onSuccess={paymentSuccessHandler} />}
                         </ListGroup.Item>
                      )}

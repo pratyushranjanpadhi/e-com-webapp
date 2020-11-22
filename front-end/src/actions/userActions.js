@@ -181,7 +181,7 @@ const deleteUser = (id) => async (dispatch, getState) => {
             Authorization: `Bearer ${userInfo.token}`, //using the token here
          },
       };
-      const { data } = await axios.delete(`/api/users/${id}`, config);
+      await axios.delete(`/api/users/${id}`, config);
       dispatch({
          type: actionTypes.USER_DELETE_SUCCESS,
       });
@@ -193,4 +193,38 @@ const deleteUser = (id) => async (dispatch, getState) => {
    }
 };
 
-export { login, logout, register, getUserDetails, updateUserProfile, listUsers, deleteUser };
+//
+const updateUser = (user) => async (dispatch, getState) => {
+   try {
+      dispatch({
+         type: actionTypes.USER_UPDATE_REQUEST,
+      });
+      const {
+         userLogin: { userInfo },
+      } = getState();
+
+      //Using this for authorization : sending the header
+      const config = {
+         headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${userInfo.token}`, //using the token here
+         },
+      };
+      const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+      dispatch({
+         type: actionTypes.USER_UPDATE_SUCCESS,
+      });
+
+      dispatch({
+         type: actionTypes.USER_DETAILS_SUCCESS,
+         payload: data,
+      });
+   } catch (error) {
+      dispatch({
+         type: actionTypes.USER_UPDATE_FAIL,
+         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+      });
+   }
+};
+
+export { login, logout, register, getUserDetails, updateUserProfile, listUsers, deleteUser, updateUser };
