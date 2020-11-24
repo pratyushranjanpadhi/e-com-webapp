@@ -1,6 +1,6 @@
 import * as actionTypes from "../actionTypes";
 
-export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, action) => {
+const cartReducer = (state = { cartItems: [], shippingAddress: {} }, action) => {
    switch (action.type) {
       case actionTypes.CART_ADD_ITEM:
          const item = action.payload;
@@ -38,3 +38,5 @@ export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, acti
          return state;
    }
 };
+
+export { cartReducer };

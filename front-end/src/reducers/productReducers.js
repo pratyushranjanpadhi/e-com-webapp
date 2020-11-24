@@ -1,6 +1,6 @@
 import * as actionTypes from "../actionTypes";
 
-export const prodcutListReducer = (state = { products: [] }, action) => {
+const prodcutListReducer = (state = { products: [] }, action) => {
    switch (action.type) {
       case actionTypes.PRODUCT_LIST_REQUEST:
          return { loading: true, products: [] };
@@ -13,7 +13,7 @@ export const prodcutListReducer = (state = { products: [] }, action) => {
    }
 };
 
-export const productDetailsReducer = (state = { product: {} }, action) => {
+const productDetailsReducer = (state = { product: {} }, action) => {
    switch (action.type) {
       case actionTypes.PRODUCT_DETAILS_REQUEST:
          return { loading: true, ...state };
@@ -25,3 +25,18 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
          return state;
    }
 };
+
+const productDeleteReducer = (state = {}, action) => {
+   switch (action.type) {
+      case actionTypes.PRODUCT_DELETE_REQUEST:
+         return { loading: true };
+      case actionTypes.PRODUCT_DELETE_SUCCESS:
+         return { loading: false, success: true };
+      case actionTypes.PRODUCT_DELETE_FAIL:
+         return { loading: false, error: action.payload };
+      default:
+         return state;
+   }
+};
+
+export { prodcutListReducer, productDetailsReducer, productDeleteReducer };
