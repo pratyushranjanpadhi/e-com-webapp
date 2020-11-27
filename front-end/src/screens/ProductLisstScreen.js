@@ -4,7 +4,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { deleteProduct, listProduct } from "../actions/productAction";
+import { deleteProduct, listProduct, createProduct } from "../actions/productAction";
+import * as actionTypes from "../actionTypes";
 
 const ProductListScreen = ({ history, match }) => {
    const dispatch = useDispatch();
@@ -14,14 +15,20 @@ const ProductListScreen = ({ history, match }) => {
    const { userInfo } = userLogin;
    const productDelete = useSelector((state) => state.productDelete);
    const { loading: deleteLoading, success: deleteSuccess, error: deleteError } = productDelete;
+   const productCreate = useSelector((state) => state.productCreate);
+   const { loading: createLoading, success: createSuccess, error: createError, product: createdProduct } = productCreate;
 
    useEffect(() => {
-      if (userInfo && userInfo.isAdmin) {
-         dispatch(listProduct());
-      } else {
+      dispatch({ type: actionTypes.PRODUCT_CREATE_RESET });
+      if (!userInfo || !userInfo.isAdmin) {
          history.push("/login");
       }
-   }, [dispatch, history, deleteSuccess, userInfo]);
+      if (createSuccess) {
+         history.push(`/admin/product/${createdProduct._id}/edit`);
+      } else {
+         dispatch(listProduct());
+      }
+   }, [dispatch, history, deleteSuccess, userInfo, createSuccess, createdProduct, actionTypes]);
 
    const deleteHandler = (id) => {
       if (window.confirm("Are you sure")) {
@@ -29,8 +36,8 @@ const ProductListScreen = ({ history, match }) => {
       }
    };
 
-   const createProductHandler = (product) => {
-      //Product Handler
+   const createProductHandler = () => {
+      dispatch(createProduct());
    };
 
    return (
