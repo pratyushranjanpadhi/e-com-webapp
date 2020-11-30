@@ -1,10 +1,12 @@
 import express from "express";
+import path from "path";
 import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/db.js";
 import productRouter from "./route/productRouter.js";
 import userRouter from "./route/userRouter.js";
 import orderRouter from "./route/orderRouter.js";
+import uploadRouter from "./route/uploadRouter.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -22,10 +24,14 @@ app.get("/", (req, res) => {
 app.use("/api/products/", productRouter);
 app.use("/api/users/", userRouter);
 app.use("/api/orders/", orderRouter);
+app.use("/api/uploads/", uploadRouter);
 
 app.get("/api/config/paypal", (req, res) => {
    res.send(process.env.PAYPAL_CLIENT_ID);
 });
+
+const __dirname = path.resolve();
+app.use("/uploads/", express.static(path.join(__dirname, "/uploads/")));
 
 app.use(notFound);
 app.use(errorHandler);

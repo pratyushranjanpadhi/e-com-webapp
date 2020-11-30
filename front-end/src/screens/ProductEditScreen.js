@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "react-bootstrap";
@@ -54,6 +55,25 @@ function ProductEditScreen({ match, history }) {
       dispatch(updateProduct({ _id: productId, name, price, image, brand, category, countInStock, description }));
    };
 
+   const uploadFileHandler = async (e) => {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("image", file);
+      setUploading(true);
+      try {
+         const config = {
+            headers: {
+               "Content-type": "multipart/form",
+            },
+         };
+         const { data } = await axios.post("/api/uploads", formData, config);
+         setImage(data);
+         setUploading(false);
+      } catch (error) {
+         console.error(error);
+         setUploading(true);
+      }
+   };
    return (
       <>
          <Link to="/admin/productList" className="btn btn-light my-3 p-2">
@@ -104,6 +124,7 @@ function ProductEditScreen({ match, history }) {
                            setImage(e.target.value);
                         }}
                      ></Form.Control>
+                     <Form.File id="image-file" label="Choose Image" custom onChange={uploadFileHandler}></Form.File> {uploading && <Loader />}
                   </Form.Group>
 
                   <Form.Group controlId="brand">
