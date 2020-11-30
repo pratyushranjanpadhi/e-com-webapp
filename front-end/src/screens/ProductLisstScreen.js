@@ -28,7 +28,7 @@ const ProductListScreen = ({ history, match }) => {
       } else {
          dispatch(listProduct());
       }
-   }, [dispatch, history, deleteSuccess, userInfo, createSuccess, createdProduct, actionTypes]);
+   }, [dispatch, history, deleteSuccess, userInfo, createSuccess, createdProduct]);
 
    const deleteHandler = (id) => {
       if (window.confirm("Are you sure")) {
@@ -52,6 +52,8 @@ const ProductListScreen = ({ history, match }) => {
                </Button>
             </Col>
          </Row>
+         {createLoading && <Loader />}
+         {createError && <Message>{createError}</Message>}
          {deleteLoading && <Loader />}
          {deleteError && <Message>{deleteError}</Message>}
          {loading ? (
