@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import colors from "colors";
+import morgan from "morgan";
 import connectDB from "./config/db.js";
 import productRouter from "./route/productRouter.js";
 import userRouter from "./route/userRouter.js";
@@ -15,6 +16,7 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(morgan("dev"));
 app.use(express.json());
 
 app.get("/", (req, res) => {

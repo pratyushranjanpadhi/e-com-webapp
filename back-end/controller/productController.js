@@ -70,4 +70,34 @@ const updateProduct = asyncHandler(async (req, res) => {
    }
 });
 
-export { getProducts, getProductById, deleteProduct, createProduct, updateProduct };
+const createProductReview = asyncHandler(async (req, res) => {
+   const { rating, comment } = req.body;
+   const product = await Product.findById(req.params.id);
+   if (product) {
+      const alreadyReviewed = product.review.find((r) => r.user.toString() === req.user._id.toString());
+      if (alreadyReviewed) {
+         res.json(400);
+         throw new Error("You can review only once");
+      }
+
+      const review = {
+         name: req.user.name,
+         rating: Number(rating),
+         comment,
+         user: req.user._id,
+      };
+      product.review.push(review);
+      product.numReviews = product.review.length;
+      product.rating = product.review.reduce((acc, item) => item.rating + acc, 0) / product.review.length;
+
+      await product.save();
+
+      res.status(201);
+      res.json({ message: "Review Created" });
+   } else {
+      res.status(404);
+      throw new Error("Produt not found");
+   }
+});
+
+export { getProducts, getProductById, deleteProduct, createProduct, updateProduct, createProductReview };
