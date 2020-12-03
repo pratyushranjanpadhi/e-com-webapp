@@ -31,15 +31,17 @@ const App = () => {
                <Route path="/login" component={LoginScreen} />
                <Route path="/register" component={RegisterScreen} />
                <Route path="/profile" component={ProfileScreen} />
-               <Route path="/" component={HomeScreen} exact />
                <Route path="/admin/userList" component={UserListScreen} />
                <Route path="/admin/user/:id/edit" component={UserEditScreen} />
-               <Route path="/admin/productList" component={ProductListScreen} />
+               <Route path="/admin/productList" component={ProductListScreen} exact />
+               <Route path="/admin/productList/:page" component={ProductListScreen} exact />
                <Route path="/admin/product/:id/edit" component={ProductEditScreen} />
                <Route path="/admin/orderList" component={OrderListScreen} />
                <Route path="/products/:id" component={ProductScreen} />
                <Route path="/cart/:id?" component={CartScreen} />
                <Route path="/orders/:id" component={OrderScreen} />
+               <Route path="/page/:page" component={HomeScreen} />
+               <Route path="/" component={HomeScreen} exact />
             </Container>
          </main>
          <Footer />

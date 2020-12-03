@@ -5,15 +5,18 @@ import Product from "../components/Product";
 import { listProduct } from "../actions/productAction";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import MyPagination from "../components/MyPagination";
 
-function HomeScreen() {
+function HomeScreen({ match }) {
+   const pageNumber = match.params.page || 1;
    const dispatch = useDispatch();
+
    const productList = useSelector((state) => state.productList);
-   const { loading, error, products } = productList;
+   const { loading, error, products, page, totalPages } = productList;
 
    useEffect(() => {
-      dispatch(listProduct());
-   }, [dispatch]);
+      dispatch(listProduct(pageNumber));
+   }, [dispatch, pageNumber]);
    return (
       <>
          {loading ? (
@@ -21,13 +24,16 @@ function HomeScreen() {
          ) : error ? (
             <Message>{error}</Message>
          ) : (
-            <Row>
-               {products.map((product) => (
-                  <Col key={product._id} sm={12} md={6} lg={3}>
-                     <Product product={product} />
-                  </Col>
-               ))}
-            </Row>
+            <>
+               <Row>
+                  {products.map((product) => (
+                     <Col key={product._id} sm={12} md={6} lg={3}>
+                        <Product product={product} />
+                     </Col>
+                  ))}
+               </Row>
+               <MyPagination page={page} pages={totalPages} />
+            </>
          )}
       </>
    );
