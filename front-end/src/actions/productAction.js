@@ -118,4 +118,18 @@ const createProductReview = (productId, review) => async (dispatch, getState) =>
    }
 };
 
-export { listProduct, listProductDetails, deleteProduct, createProduct, updateProduct, createProductReview };
+const listTopRatedProducts = () => async (dispatch) => {
+   try {
+      dispatch({ type: actionTypes.PRODUCT_TOP_RATED_REQUEST });
+      const { data } = await axios.get(`/api/products/topRated`);
+      console.log(data);
+      dispatch({ type: actionTypes.PRODUCT_TOP_RATED_SUCCESS, payload: data });
+   } catch (error) {
+      dispatch({
+         type: actionTypes.PRODUCT_TOP_RATED_FAIL,
+         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+      });
+   }
+};
+
+export { listProduct, listProductDetails, deleteProduct, createProduct, updateProduct, createProductReview, listTopRatedProducts };

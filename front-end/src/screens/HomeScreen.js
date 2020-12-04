@@ -6,6 +6,7 @@ import { listProduct } from "../actions/productAction";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import MyPagination from "../components/MyPagination";
+import Slider from "../components/Slider";
 
 function HomeScreen({ match }) {
    const pageNumber = match.params.page || 1;
@@ -19,6 +20,8 @@ function HomeScreen({ match }) {
    }, [dispatch, pageNumber]);
    return (
       <>
+         <Slider />
+         <h1>Latest Products</h1>
          {loading ? (
             <Loader />
          ) : error ? (

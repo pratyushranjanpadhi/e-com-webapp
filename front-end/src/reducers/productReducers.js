@@ -86,4 +86,25 @@ const productCreateReviewReducer = (state = {}, action) => {
    }
 };
 
-export { prodcutListReducer, productDetailsReducer, productDeleteReducer, productCreateReducer, productUpdateReducer, productCreateReviewReducer };
+const topRatedProductsReducer = (state = { products: [] }, action) => {
+   switch (action.type) {
+      case actionTypes.PRODUCT_TOP_RATED_REQUEST:
+         return { loading: true, products: [] };
+      case actionTypes.PRODUCT_TOP_RATED_SUCCESS:
+         return { loading: false, products: action.payload };
+      case actionTypes.PRODUCT_TOP_RATED_FAIL:
+         return { loading: false, error: action.payload };
+      default:
+         return state;
+   }
+};
+
+export {
+   prodcutListReducer,
+   productDetailsReducer,
+   productDeleteReducer,
+   productCreateReducer,
+   productUpdateReducer,
+   productCreateReviewReducer,
+   topRatedProductsReducer,
+};
