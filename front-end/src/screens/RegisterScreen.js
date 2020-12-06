@@ -66,6 +66,7 @@ function RegisterScreen({ location, history }) {
                <Form.Label>Password </Form.Label>
                <Form.Control
                   placeholder="Enter Password"
+                  type="password"
                   value={password}
                   onChange={(e) => {
                      setPassword(e.target.value);
@@ -76,6 +77,7 @@ function RegisterScreen({ location, history }) {
                <Form.Label>Password </Form.Label>
                <Form.Control
                   placeholder="Confirm Password"
+                  type="password"
                   value={confirmPassword}
                   onChange={(e) => {
                      setConfirmPassword(e.target.value);

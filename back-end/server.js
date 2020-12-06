@@ -19,10 +19,6 @@ const PORT = process.env.PORT || 8080;
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.get("/", (req, res) => {
-   res.send("Hello to the home screen");
-});
-
 app.use("/api/products/", productRouter);
 app.use("/api/users/", userRouter);
 app.use("/api/orders/", orderRouter);
@@ -34,6 +30,13 @@ app.get("/api/config/paypal", (req, res) => {
 
 const __dirname = path.resolve();
 app.use("/uploads/", express.static(path.join(__dirname, "/uploads/")));
+
+if (process.env.NODE_ENV === "production") {
+   app.use(express.static(path.join(__dirname, "/front-end/build/")));
+   app.get("*", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "front-end", "build", "index.html"));
+   });
+}
 
 app.use(notFound);
 app.use(errorHandler);
