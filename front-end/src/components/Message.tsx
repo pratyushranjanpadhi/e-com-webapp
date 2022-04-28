@@ -1,8 +1,8 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 
-function Message({ children }) {
+const Message: React.FC = ({ children }) => {
    return <Alert variant="danger">{children}</Alert>;
-}
+};
 
 export default Message;

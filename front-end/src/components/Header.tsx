@@ -4,8 +4,8 @@ import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../actions/userActions";
 
-const Header = () => {
-   const userLogin = useSelector((state) => state.userLogin);
+const Header: React.FC = () => {
+   const userLogin = useSelector((state: any) => state.userLogin);
    const { userInfo } = userLogin;
    const dispatch = useDispatch();
 

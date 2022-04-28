@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-function Footer() {
+const Footer:React.FC = () => {
    return (
       <footer className="text-center py-3 ">
          <Container>

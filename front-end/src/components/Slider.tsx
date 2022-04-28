@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Loader";
 import Message from "./Message";
 import { listTopRatedProducts } from "../actions/productAction";
-const Slider = () => {
+
+const Slider: React.FC = () => {
    const dispatch = useDispatch();
 
-   const topRatedProducts = useSelector((state) => state.topRatedProducts);
+   const topRatedProducts = useSelector((state: any) => state.topRatedProducts);
    const { loading, error, products } = topRatedProducts;
 
    useEffect(() => {
@@ -21,7 +22,7 @@ const Slider = () => {
       <Message>{error}</Message>
    ) : (
       <Carousel pause="hover" className="bg-dark">
-         {products.map((product) => (
+         {products.map((product: any) => (
             <Carousel.Item key={product._id}>
                <Link to={`/products/${product._id}`}>
                   <Image src={product.image} alt={product.name} fluid />
