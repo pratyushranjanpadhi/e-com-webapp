@@ -2,7 +2,7 @@ import axios from "axios";
 import * as actionTypes from "../actionTypes";
 
 //login Action
-const login = (email, password) => async (dispatch) => {
+const login = (email: any, password: any) => async (dispatch: any) => {
    try {
       dispatch({
          type: actionTypes.USER_LOGIN_REQUEST,
@@ -20,16 +20,19 @@ const login = (email, password) => async (dispatch) => {
          payload: data,
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.USER_LOGIN_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
 //logout Action
-const logout = () => async (dispatch) => {
+const logout = () => async (dispatch: any) => {
    localStorage.removeItem("userInfo");
    dispatch({
       type: actionTypes.USER_LOGOUT,
@@ -46,7 +49,7 @@ const logout = () => async (dispatch) => {
 };
 
 //Register Action
-const register = (name, email, password) => async (dispatch) => {
+const register = (name: any, email: any, password: any) => async (dispatch: any) => {
    try {
       dispatch({
          type: actionTypes.USER_REGISTER_REQUEST,
@@ -68,16 +71,19 @@ const register = (name, email, password) => async (dispatch) => {
          payload: data,
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.USER_REGISTER_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
 //getting the user details action
-const getUserDetails = (id) => async (dispatch, getState) => {
+const getUserDetails = (id: any) => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.USER_DETAILS_REQUEST,
@@ -98,16 +104,19 @@ const getUserDetails = (id) => async (dispatch, getState) => {
          type: actionTypes.USER_DETAILS_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.USER_DETAILS_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
 // updating the user details action
-const updateUserProfile = (user) => async (dispatch, getState) => {
+const updateUserProfile = (user: any) => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.USER_PROFILE_UPDATE_REQUEST,
@@ -130,15 +139,18 @@ const updateUserProfile = (user) => async (dispatch, getState) => {
          type: actionTypes.USER_PROFILE_UPDATE_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.USER_PROFILE_UPDATE_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
-const listUsers = () => async (dispatch, getState) => {
+const listUsers = () => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.USER_LIST_REQUEST,
@@ -158,15 +170,18 @@ const listUsers = () => async (dispatch, getState) => {
          type: actionTypes.USER_LIST_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.USER_LIST_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
-const deleteUser = (id) => async (dispatch, getState) => {
+const deleteUser = (id: any) => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.USER_DELETE_REQUEST,
@@ -185,16 +200,19 @@ const deleteUser = (id) => async (dispatch, getState) => {
       dispatch({
          type: actionTypes.USER_DELETE_SUCCESS,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.USER_DELETE_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
 //
-const updateUser = (user) => async (dispatch, getState) => {
+const updateUser = (user: any) => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.USER_UPDATE_REQUEST,
@@ -219,12 +237,24 @@ const updateUser = (user) => async (dispatch, getState) => {
          type: actionTypes.USER_DETAILS_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.USER_UPDATE_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
-export { login, logout, register, getUserDetails, updateUserProfile, listUsers, deleteUser, updateUser };
+export {
+   login,
+   logout,
+   register,
+   getUserDetails,
+   updateUserProfile,
+   listUsers,
+   deleteUser,
+   updateUser,
+};

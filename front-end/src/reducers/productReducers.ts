@@ -1,11 +1,16 @@
 import * as actionTypes from "../actionTypes";
 
-const prodcutListReducer = (state = { products: [] }, action) => {
+const prodcutListReducer = (state = { products: [] }, action: any) => {
    switch (action.type) {
       case actionTypes.PRODUCT_LIST_REQUEST:
          return { loading: true, products: [] };
       case actionTypes.PRODUCT_LIST_SUCCESS:
-         return { loading: false, products: action.payload.products, page: action.payload.page, totalPages: action.payload.totalPages };
+         return {
+            loading: false,
+            products: action.payload.products,
+            page: action.payload.page,
+            totalPages: action.payload.totalPages,
+         };
       case actionTypes.PRODUCT_LIST_FAIL:
          return { loading: false, error: action.payload };
       default:
@@ -13,7 +18,7 @@ const prodcutListReducer = (state = { products: [] }, action) => {
    }
 };
 
-const productDetailsReducer = (state = { product: { review: [] } }, action) => {
+const productDetailsReducer = (state = { product: { review: [] } }, action: any) => {
    switch (action.type) {
       case actionTypes.PRODUCT_DETAILS_REQUEST:
          return { loading: true, ...state };
@@ -26,7 +31,7 @@ const productDetailsReducer = (state = { product: { review: [] } }, action) => {
    }
 };
 
-const productDeleteReducer = (state = {}, action) => {
+const productDeleteReducer = (state = {}, action: any) => {
    switch (action.type) {
       case actionTypes.PRODUCT_DELETE_REQUEST:
          return { loading: true };
@@ -41,7 +46,7 @@ const productDeleteReducer = (state = {}, action) => {
    }
 };
 
-const productCreateReducer = (state = {}, action) => {
+const productCreateReducer = (state = {}, action: any) => {
    switch (action.type) {
       case actionTypes.PRODUCT_CREATE_REQUEST:
          return { loading: true };
@@ -56,7 +61,7 @@ const productCreateReducer = (state = {}, action) => {
    }
 };
 
-const productUpdateReducer = (state = { product: {} }, action) => {
+const productUpdateReducer = (state = { product: {} }, action: any) => {
    switch (action.type) {
       case actionTypes.PRODUCT_UPDATE_REQUEST:
          return { loading: true };
@@ -71,7 +76,7 @@ const productUpdateReducer = (state = { product: {} }, action) => {
    }
 };
 
-const productCreateReviewReducer = (state = {}, action) => {
+const productCreateReviewReducer = (state = {}, action: any) => {
    switch (action.type) {
       case actionTypes.PRODUCT_CREATE_REVIEW_REQUEST:
          return { loading: true };
@@ -86,7 +91,7 @@ const productCreateReviewReducer = (state = {}, action) => {
    }
 };
 
-const topRatedProductsReducer = (state = { products: [] }, action) => {
+const topRatedProductsReducer = (state = { products: [] }, action: any) => {
    switch (action.type) {
       case actionTypes.PRODUCT_TOP_RATED_REQUEST:
          return { loading: true, products: [] };

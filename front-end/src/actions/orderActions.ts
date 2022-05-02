@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "../actionTypes";
 
-const createOrder = (order) => async (dispatch, getState) => {
+const createOrder = (order: any) => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.CREATE_ORDER_REQUEST,
@@ -21,15 +21,18 @@ const createOrder = (order) => async (dispatch, getState) => {
          type: actionTypes.CREATE_ORDER_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.CREATE_ORDER_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
-const getOrderDetails = (id) => async (dispatch, getState) => {
+const getOrderDetails = (id: any) => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.ORDER_DETAILS_REQUEST,
@@ -48,15 +51,18 @@ const getOrderDetails = (id) => async (dispatch, getState) => {
          type: actionTypes.ORDER_DETAILS_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.PRODUCT_DETAILS_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
-const payOrder = (orderId, paymentResult) => async (dispatch, getState) => {
+const payOrder = (orderId: any, paymentResult: any) => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.ORDER_PAY_REQUEST,
@@ -76,15 +82,18 @@ const payOrder = (orderId, paymentResult) => async (dispatch, getState) => {
          type: actionTypes.ORDER_PAY_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.ORDER_PAY_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
-const deliverOrder = (id) => async (dispatch, getState) => {
+const deliverOrder = (id: any) => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.ORDER_DELIVER_REQUEST,
@@ -103,15 +112,18 @@ const deliverOrder = (id) => async (dispatch, getState) => {
          type: actionTypes.ORDER_DELIVER_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.ORDER_DELIVER_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
-const listMyOrders = () => async (dispatch, getState) => {
+const listMyOrders = () => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.MY_ORDER_LIST_REQUEST,
@@ -130,15 +142,18 @@ const listMyOrders = () => async (dispatch, getState) => {
          type: actionTypes.MY_ORDER_LIST_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.MY_ORDER_LIST_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };
 
-const listAllOrders = () => async (dispatch, getState) => {
+const listAllOrders = () => async (dispatch: any, getState: any) => {
    try {
       dispatch({
          type: actionTypes.ORDER_LIST_REQUEST,
@@ -157,10 +172,13 @@ const listAllOrders = () => async (dispatch, getState) => {
          type: actionTypes.ORDER_LIST_SUCCESS,
          payload: data,
       });
-   } catch (error) {
+   } catch (error: any) {
       dispatch({
          type: actionTypes.ORDER_LIST_FAIL,
-         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
       });
    }
 };

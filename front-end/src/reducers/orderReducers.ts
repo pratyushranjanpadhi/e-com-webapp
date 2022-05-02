@@ -1,6 +1,6 @@
 import * as actionTypes from "../actionTypes";
 
-const createOrderReducer = (state = {}, action) => {
+const createOrderReducer = (state = {}, action: any) => {
    switch (action.type) {
       case actionTypes.CREATE_ORDER_REQUEST:
          return {
@@ -22,7 +22,10 @@ const createOrderReducer = (state = {}, action) => {
    }
 };
 
-const orderDetailsReducer = (state = { loading: true, orderItems: [], shippingAddress: {} }, action) => {
+const orderDetailsReducer = (
+   state = { loading: true, orderItems: [], shippingAddress: {} },
+   action: any
+) => {
    switch (action.type) {
       case actionTypes.ORDER_DETAILS_REQUEST:
          return {
@@ -44,7 +47,7 @@ const orderDetailsReducer = (state = { loading: true, orderItems: [], shippingAd
    }
 };
 
-const orderPayReducer = (state = {}, action) => {
+const orderPayReducer = (state = {}, action: any) => {
    switch (action.type) {
       case actionTypes.ORDER_PAY_REQUEST:
          return {
@@ -67,7 +70,7 @@ const orderPayReducer = (state = {}, action) => {
    }
 };
 
-const orderDeliverReducer = (state = {}, action) => {
+const orderDeliverReducer = (state = {}, action: any) => {
    switch (action.type) {
       case actionTypes.ORDER_DELIVER_REQUEST:
          return {
@@ -90,7 +93,7 @@ const orderDeliverReducer = (state = {}, action) => {
    }
 };
 
-const myOrderListReducer = (state = { orders: [] }, action) => {
+const myOrderListReducer = (state = { orders: [] }, action: any) => {
    switch (action.type) {
       case actionTypes.MY_ORDER_LIST_REQUEST:
          return {
@@ -113,7 +116,7 @@ const myOrderListReducer = (state = { orders: [] }, action) => {
    }
 };
 
-const orderListReducer = (state = { orders: [] }, action) => {
+const orderListReducer = (state = { orders: [] }, action: any) => {
    switch (action.type) {
       case actionTypes.ORDER_LIST_REQUEST:
          return {
@@ -134,4 +137,11 @@ const orderListReducer = (state = { orders: [] }, action) => {
    }
 };
 
-export { createOrderReducer, orderDetailsReducer, orderPayReducer, orderDeliverReducer, myOrderListReducer, orderListReducer };
+export {
+   createOrderReducer,
+   orderDetailsReducer,
+   orderPayReducer,
+   orderDeliverReducer,
+   myOrderListReducer,
+   orderListReducer,
+};

@@ -2,7 +2,7 @@ import axios from "axios";
 import * as actionTypes from "../actionTypes";
 
 // action to add to the cart
-const addToCart = (id, quantity) => async (dispatch, getState) => {
+const addToCart = (id: any, quantity: any) => async (dispatch: any, getState: any) => {
    const { data } = await axios.get(`/api/products/${id}`);
    dispatch({
       type: actionTypes.CART_ADD_ITEM,
@@ -19,7 +19,7 @@ const addToCart = (id, quantity) => async (dispatch, getState) => {
 };
 
 // action to remove from cart
-const removeFromCart = (id) => (dispatch, getState) => {
+const removeFromCart = (id: any) => (dispatch: any, getState: any) => {
    dispatch({
       type: actionTypes.CART_REMOVE_ITEM,
       payload: id,
@@ -28,7 +28,7 @@ const removeFromCart = (id) => (dispatch, getState) => {
 };
 
 //action to handle shipping address
-const saveShippingAddress = (data) => (dispatch) => {
+const saveShippingAddress = (data: any) => (dispatch: any) => {
    dispatch({
       type: actionTypes.CART_SAVE_SHIPPING_DETAILS,
       payload: data,
@@ -37,7 +37,7 @@ const saveShippingAddress = (data) => (dispatch) => {
    localStorage.setItem("shippingAddress", JSON.stringify(data));
 };
 
-const savePaymentMethod = (data) => (dispatch) => {
+const savePaymentMethod = (data: any) => (dispatch: any) => {
    dispatch({
       type: actionTypes.CART_SAVE_PAYMENT_METHOD,
       payload: data,
