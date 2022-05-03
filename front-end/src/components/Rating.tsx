@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
    rating: number;
-   details: string;
+   details?: string;
 }
 const Rating: React.FC<Props> = ({ rating, details }) => {
    return (

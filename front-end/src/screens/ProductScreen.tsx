@@ -133,6 +133,7 @@ const ProductScreen: React.FC<Props> = ({ history, match }) => {
                         {product.review.map((review: any) => (
                            <ListGroup.Item key={review._id}>
                               <strong>{review.name}</strong>
+                              {/* renamed the prop "values" to "rating" , check again  */}
                               <Rating rating={review.rating} />
                               <p>{review.comment}</p>
                            </ListGroup.Item>
