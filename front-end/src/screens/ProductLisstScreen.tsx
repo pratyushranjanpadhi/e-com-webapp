@@ -8,17 +8,26 @@ import { deleteProduct, listProduct, createProduct } from "../actions/productAct
 import * as actionTypes from "../actionTypes";
 import MyPagination from "../components/MyPagination";
 
-const ProductListScreen = ({ history, match }) => {
+interface Props {
+   history: any;
+   match: any;
+}
+const ProductListScreen: React.FC<Props> = ({ history, match }) => {
    const pageNumber = match.params.page || 1;
    const dispatch = useDispatch();
-   const productList = useSelector((state) => state.productList);
+   const productList = useSelector((state: any) => state.productList);
    const { loading, error, products, page, totalPages } = productList;
-   const userLogin = useSelector((state) => state.userLogin);
+   const userLogin = useSelector((state: any) => state.userLogin);
    const { userInfo } = userLogin;
-   const productDelete = useSelector((state) => state.productDelete);
+   const productDelete = useSelector((state: any) => state.productDelete);
    const { loading: deleteLoading, success: deleteSuccess, error: deleteError } = productDelete;
-   const productCreate = useSelector((state) => state.productCreate);
-   const { loading: createLoading, success: createSuccess, error: createError, product: createdProduct } = productCreate;
+   const productCreate = useSelector((state: any) => state.productCreate);
+   const {
+      loading: createLoading,
+      success: createSuccess,
+      error: createError,
+      product: createdProduct,
+   } = productCreate;
 
    useEffect(() => {
       dispatch({ type: actionTypes.PRODUCT_CREATE_RESET });
@@ -32,7 +41,7 @@ const ProductListScreen = ({ history, match }) => {
       }
    }, [dispatch, history, deleteSuccess, userInfo, createSuccess, createdProduct, pageNumber]);
 
-   const deleteHandler = (id) => {
+   const deleteHandler = (id: any) => {
       if (window.confirm("Are you sure")) {
          dispatch(deleteProduct(id));
       }
@@ -76,7 +85,7 @@ const ProductListScreen = ({ history, match }) => {
                      </tr>
                   </thead>
                   <tbody>
-                     {products.map((product) => (
+                     {products.map((product: any) => (
                         <tr key={product._id}>
                            <td>{product._id}</td>
                            <td>{product.name}</td>
@@ -89,7 +98,11 @@ const ProductListScreen = ({ history, match }) => {
                                     <i className="fas fa-edit"></i>
                                  </Button>
                               </LinkContainer>
-                              <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(product._id)}>
+                              <Button
+                                 variant="danger"
+                                 className="btn-sm"
+                                 onClick={() => deleteHandler(product._id)}
+                              >
                                  <i className="fas fa-trash"></i>
                               </Button>
                            </td>

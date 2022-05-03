@@ -7,25 +7,30 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 
-const ProfileScreen = ({ location, history }) => {
+interface Props {
+   location: any;
+   history: any;
+}
+
+const ProfileScreen: React.FC<Props> = ({ location, history }) => {
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
-   const [message, setMessage] = useState(null);
+   const [message, setMessage] = useState<string | null>(null);
 
    const dispatch = useDispatch();
 
-   const userDetails = useSelector((state) => state.userDetails);
+   const userDetails = useSelector((state: any) => state.userDetails);
    const { loading, error, user } = userDetails;
 
-   const myOrderList = useSelector((state) => state.myOrderList);
+   const myOrderList = useSelector((state: any) => state.myOrderList);
    const { loading: orderLoading, error: orderError, orders } = myOrderList;
 
-   const userLogin = useSelector((state) => state.userLogin);
+   const userLogin = useSelector((state: any) => state.userLogin);
    const { userInfo } = userLogin;
 
-   const userProfileUpdate = useSelector((state) => state.userProfileUpdate);
+   const userProfileUpdate = useSelector((state: any) => state.userProfileUpdate);
    const { success } = userProfileUpdate;
 
    useEffect(() => {
@@ -42,7 +47,7 @@ const ProfileScreen = ({ location, history }) => {
       }
    }, [user, userInfo, history, dispatch]);
 
-   const submitHandler = (e) => {
+   const submitHandler = (e: any) => {
       e.preventDefault();
       if (password !== confirmPassword) {
          setMessage("Password do not match");
@@ -123,13 +128,23 @@ const ProfileScreen = ({ location, history }) => {
                      </tr>
                   </thead>
                   <tbody>
-                     {orders.map((order) => (
+                     {orders.map((order: any) => (
                         <tr key={order._id}>
                            <td>{order._id}</td>
                            <td>{order.totalPrice}</td>
-                           <td>{order.isPaid ? order.paidAt.substring(0, 10) : <i className="fas fa-times" style={{ color: "red" }}></i>}</td>
                            <td>
-                              {order.isDelivered ? order.deliveredAt.substring(0, 10) : <i className="fas fa-times" style={{ color: "red" }}></i>}
+                              {order.isPaid ? (
+                                 order.paidAt.substring(0, 10)
+                              ) : (
+                                 <i className="fas fa-times" style={{ color: "red" }}></i>
+                              )}
+                           </td>
+                           <td>
+                              {order.isDelivered ? (
+                                 order.deliveredAt.substring(0, 10)
+                              ) : (
+                                 <i className="fas fa-times" style={{ color: "red" }}></i>
+                              )}
                            </td>
                            <td>
                               <LinkContainer to={`/orders/${order._id}`}>

@@ -6,13 +6,17 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listAllOrders } from "../actions/orderActions";
 
-const OrderListScreen = ({ history }) => {
+interface Props {
+   history: any;
+}
+
+const OrderListScreen: React.FC<Props> = ({ history }) => {
    const dispatch = useDispatch();
 
-   const orderList = useSelector((state) => state.orderList);
+   const orderList = useSelector((state: any) => state.orderList);
    const { loading, error, orders } = orderList;
 
-   const userLogin = useSelector((state) => state.userLogin);
+   const userLogin = useSelector((state: any) => state.userLogin);
    const { userInfo } = userLogin;
 
    useEffect(() => {
@@ -43,13 +47,25 @@ const OrderListScreen = ({ history }) => {
                   </tr>
                </thead>
                <tbody>
-                  {orders.map((order) => (
+                  {orders.map((order: any) => (
                      <tr key={order._id}>
                         <td>{order._id}</td>
                         <td>{order.user && order.user.name}</td>
                         <td>${order.totalPrice}</td>
-                        <td>{order.isPaid ? order.paidAt.substring(0, 10) : <i className="fas fa-times" style={{ color: "red" }}></i>}</td>
-                        <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) : <i className="fas fa-times" style={{ color: "red" }}></i>}</td>
+                        <td>
+                           {order.isPaid ? (
+                              order.paidAt.substring(0, 10)
+                           ) : (
+                              <i className="fas fa-times" style={{ color: "red" }}></i>
+                           )}
+                        </td>
+                        <td>
+                           {order.isDelivered ? (
+                              order.deliveredAt.substring(0, 10)
+                           ) : (
+                              <i className="fas fa-times" style={{ color: "red" }}></i>
+                           )}
+                        </td>
                         <td>
                            <LinkContainer to={`/orders/${order._id}`}>
                               <Button variant="light" className="btn-sm">

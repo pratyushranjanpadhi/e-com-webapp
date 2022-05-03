@@ -6,13 +6,16 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { listUsers, deleteUser } from "../actions/userActions";
 
-const UserListScreen = ({ history }) => {
+interface Props {
+   history: any;
+}
+const UserListScreen: React.FC<Props> = ({ history }) => {
    const dispatch = useDispatch();
-   const userList = useSelector((state) => state.userList);
+   const userList = useSelector((state: any) => state.userList);
    const { loading, error, users } = userList;
-   const userLogin = useSelector((state) => state.userLogin);
+   const userLogin = useSelector((state: any) => state.userLogin);
    const { userInfo } = userLogin;
-   const userDelete = useSelector((state) => state.userDelete);
+   const userDelete = useSelector((state: any) => state.userDelete);
    const { loading: deleteLoading, success: deleteSuccess, error: deleteError } = userDelete;
 
    useEffect(() => {
@@ -23,7 +26,7 @@ const UserListScreen = ({ history }) => {
       }
    }, [dispatch, history, userInfo, deleteSuccess]);
 
-   const deleteHandler = (id) => {
+   const deleteHandler = (id: any) => {
       if (window.confirm("Are you sure")) {
          dispatch(deleteUser(id));
       }
@@ -48,7 +51,7 @@ const UserListScreen = ({ history }) => {
                   </tr>
                </thead>
                <tbody>
-                  {users.map((user) => (
+                  {users.map((user: any) => (
                      <tr key={user._id}>
                         <td>{user._id}</td>
                         <td>{user.name}</td>
@@ -68,7 +71,11 @@ const UserListScreen = ({ history }) => {
                                  <i className="fas fa-edit"></i>
                               </Button>
                            </LinkContainer>
-                           <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(user._id)}>
+                           <Button
+                              variant="danger"
+                              className="btn-sm"
+                              onClick={() => deleteHandler(user._id)}
+                           >
                               <i className="fas fa-trash"></i>
                            </Button>
                         </td>

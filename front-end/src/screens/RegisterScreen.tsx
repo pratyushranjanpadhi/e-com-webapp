@@ -7,16 +7,21 @@ import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
-function RegisterScreen({ location, history }) {
+interface Props {
+   location: any;
+   history: any;
+}
+
+const RegisterScreen: React.FC<Props> = ({ location, history }) => {
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
-   const [message, setMessage] = useState(null);
+   const [message, setMessage] = useState<string | null>(null);
 
    const dispatch = useDispatch();
 
-   const userRegister = useSelector((state) => state.userRegister);
+   const userRegister = useSelector((state: any) => state.userRegister);
    const { loading, error, userInfo } = userRegister;
    const redirect = location.search ? location.search.split("=")[1] : "/";
 
@@ -26,7 +31,7 @@ function RegisterScreen({ location, history }) {
       }
    }, [userInfo, history, redirect]);
 
-   const submitHandler = (e) => {
+   const submitHandler = (e: any) => {
       e.preventDefault();
       if (password !== confirmPassword) {
          setMessage("Password do not match");
@@ -90,11 +95,12 @@ function RegisterScreen({ location, history }) {
          </Form>
          <Row className="py-3">
             <Col>
-               Already have an account ? <Link to={redirect ? `/login/?redirect=${redirect}` : "/login"}>Login</Link>
+               Already have an account ?{" "}
+               <Link to={redirect ? `/login/?redirect=${redirect}` : "/login"}>Login</Link>
             </Col>
          </Row>
       </FormContainer>
    );
-}
+};
 
 export default RegisterScreen;

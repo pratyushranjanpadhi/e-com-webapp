@@ -7,11 +7,16 @@ import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
-function LoginScreen({ location, history }) {
+interface Props {
+   location: any;
+   history: any;
+}
+
+const LoginScreen: React.FC<Props> = ({ location, history }) => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const dispatch = useDispatch();
-   const userLogin = useSelector((state) => state.userLogin);
+   const userLogin = useSelector((state: any) => state.userLogin);
    const { loading, error, userInfo } = userLogin;
    const redirect = location.search ? location.search.split("=")[1] : "/";
 
@@ -20,7 +25,7 @@ function LoginScreen({ location, history }) {
          history.push(redirect);
       }
    }, [userInfo, history, redirect]);
-   const submitHandler = (e) => {
+   const submitHandler = (e: any) => {
       e.preventDefault();
       dispatch(login(email, password));
    };
@@ -58,11 +63,12 @@ function LoginScreen({ location, history }) {
          </Form>
          <Row className="py-3">
             <Col>
-               New User? <Link to={redirect ? `/register/?redirect=${redirect}` : "/register"}>Register</Link>
+               New User?{" "}
+               <Link to={redirect ? `/register/?redirect=${redirect}` : "/register"}>Register</Link>
             </Col>
          </Row>
       </FormContainer>
    );
-}
+};
 
 export default LoginScreen;
