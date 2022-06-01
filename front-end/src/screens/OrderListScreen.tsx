@@ -4,7 +4,7 @@ import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { listAllOrders } from "../actions/orderActions";
+import { listAllOrders } from "../actions/orderAction/orderActions";
 
 interface Props {
    history: any;

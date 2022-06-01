@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { listUsers, deleteUser } from "../actions/userActions";
+import { listUsers, deleteUser } from "../actions/userAction/userActions";
 
 interface Props {
    history: any;

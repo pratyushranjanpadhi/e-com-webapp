@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Form } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
-import { saveShippingAddress } from "../actions/cartAction";
+import { saveShippingAddress } from "../actions/cartAction/cartAction";
 
 interface Props {
    history: any;
