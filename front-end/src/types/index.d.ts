@@ -12,6 +12,8 @@ export interface IShippingAddress {
    country: string;
 }
 
+export type IPaymentMethod = string;
+
 export interface IPaymentResult {
    id: string;
    status: string;
@@ -65,4 +67,23 @@ export interface IOrder {
    deliveredAt?: Date;
    shippingAddress?: IShippingAddress;
    paymentResult?: IPaymentResult;
+}
+
+export interface ICreateOrder {
+   orderItems: ICartItem[];
+   shippingAddress: IShippingAddress;
+   paymentMethod: IPaymentMethod;
+   itemsPrice: number;
+   shippingPrice: number;
+   taxPrice: number;
+   totalPrice: number;
+}
+
+export interface ICartItem {
+   product: string;
+   name: string;
+   image: string;
+   price: number;
+   countInStock: number;
+   quantity: number;
 }

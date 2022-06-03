@@ -1,16 +1,9 @@
 import * as actionTypes from "actionTypes";
-import { IShippingAddress } from "types";
+import { IShippingAddress, ICartItem, IPaymentMethod } from "types";
 
 export interface AddToCartDispatchType {
    type: typeof actionTypes.CART_ADD_ITEM;
-   payload: {
-      product: string;
-      name: string;
-      image: string;
-      price: number;
-      countInStock: number;
-      quantity: number;
-   };
+   payload: ICartItem;
 }
 
 export interface RemoveFromCartDispatchType {
@@ -25,5 +18,5 @@ export interface SaveShippingAddressDispatchType {
 
 export interface SavePaymentMethodDispatchType {
    type: typeof actionTypes.CART_SAVE_PAYMENT_METHOD;
-   payload: string;
+   payload: IPaymentMethod;
 }
