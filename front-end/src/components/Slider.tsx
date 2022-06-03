@@ -4,7 +4,7 @@ import { Carousel, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Loader";
 import Message from "./Message";
-import { listTopRatedProducts } from "../actions/productAction/productAction";
+import { listTopRatedProducts } from "../actions/productAction/productActions";
 
 const Slider: React.FC = () => {
    const dispatch = useDispatch();

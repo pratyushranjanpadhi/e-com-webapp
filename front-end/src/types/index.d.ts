@@ -1,5 +1,5 @@
 export interface IReview {
-   _id: string;
+   _id?: string;
    name: string;
    rating: number;
    comment: string;
@@ -22,7 +22,7 @@ export interface IPaymentResult {
 }
 
 export interface IOrderItem {
-   _id: string;
+   _id?: string;
    product: IProduct;
    name: string;
    image: string;
@@ -31,7 +31,7 @@ export interface IOrderItem {
 }
 
 export interface IUser {
-   _id: string;
+   _id?: string;
    isAdmin: boolean;
    name: string;
    email: string;
@@ -39,7 +39,7 @@ export interface IUser {
 }
 
 export interface IProduct {
-   _id: string;
+   _id?: string;
    price: number;
    countInStock: number;
    rating: number;
@@ -54,7 +54,7 @@ export interface IProduct {
 }
 
 export interface IOrder {
-   _id: string;
+   _id?: string;
    taxPrice: string;
    shippingPrice: string;
    totalPrice: string;
