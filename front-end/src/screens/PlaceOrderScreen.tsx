@@ -6,20 +6,29 @@ import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder } from "../actions/orderActions";
 
-const PlaceOrderScreen = ({ history }) => {
-   const cart = useSelector((state) => state.cart);
+interface Props {
+   history: any;
+}
+const PlaceOrderScreen: React.FC<Props> = ({ history }) => {
+   const cart = useSelector((state: any) => state.cart);
    const { cartItems, shippingAddress, paymentMethod } = cart;
 
    //Price Calculation
-   const addDecimals = (num) => {
+   const addDecimals = (num: any) => {
       return (Math.round(num * 100) / 100).toFixed(2);
    };
-   cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0));
+   cart.itemsPrice = addDecimals(
+      cart.cartItems.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0)
+   );
    cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
    cart.taxPrice = addDecimals(Number((0.18 * cart.itemsPrice).toFixed(2)));
-   cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2);
+   cart.totalPrice = (
+      Number(cart.itemsPrice) +
+      Number(cart.shippingPrice) +
+      Number(cart.taxPrice)
+   ).toFixed(2);
 
-   const { order, success, error } = useSelector((state) => state.createOrder);
+   const { order, success, error } = useSelector((state: any) => state.createOrder);
    useEffect(() => {
       if (success) {
          history.push(`/orders/${order._id}`);
@@ -51,7 +60,8 @@ const PlaceOrderScreen = ({ history }) => {
                      <h2>Shipping Address</h2>
                      <p>
                         <strong>Address : </strong>
-                        {shippingAddress.address}, {shippingAddress.city}, {shippingAddress.postalCode}, {shippingAddress.country}
+                        {shippingAddress.address}, {shippingAddress.city},{" "}
+                        {shippingAddress.postalCode}, {shippingAddress.country}
                      </p>
                   </ListGroup.Item>
                   <ListGroup.Item>
@@ -65,7 +75,7 @@ const PlaceOrderScreen = ({ history }) => {
                         <Message>Your Cart is empty</Message>
                      ) : (
                         <ListGroup variant="flush">
-                           {cartItems.map((item, index) => (
+                           {cartItems.map((item: any, index: number) => (
                               <ListGroup.Item key={index}>
                                  <Row>
                                     <Col md={1}>
@@ -75,7 +85,8 @@ const PlaceOrderScreen = ({ history }) => {
                                        <Link to={`/products/${item.product}`}>{item.name}</Link>
                                     </Col>
                                     <Col md={4}>
-                                       {item.quantity} X ${item.price} = ${item.quantity * item.price}
+                                       {item.quantity} X ${item.price} = $
+                                       {item.quantity * item.price}
                                     </Col>
                                  </Row>
                               </ListGroup.Item>
@@ -118,7 +129,12 @@ const PlaceOrderScreen = ({ history }) => {
                      </ListGroup.Item>
                      <ListGroup.Item>{error && <Message>{error}</Message>}</ListGroup.Item>
                      <ListGroup.Item>
-                        <Button type="button" className="btn-block" disabled={cart.cartItems === 0} onClick={placeOrderHandler}>
+                        <Button
+                           type="button"
+                           className="btn-block"
+                           disabled={cart.cartItems === 0}
+                           onClick={placeOrderHandler}
+                        >
                            Place Order
                         </Button>
                      </ListGroup.Item>

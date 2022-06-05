@@ -5,8 +5,12 @@ import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { savePaymentMethod } from "../actions/cartAction";
 
-const PaymentScreen = ({ history }) => {
-   const cart = useSelector((state) => state.cart);
+interface Props {
+   history: any;
+}
+
+const PaymentScreen: React.FC<Props> = ({ history }) => {
+   const cart = useSelector((state: any) => state.cart);
    const { shippingAddress } = cart;
    if (!shippingAddress) {
       history.push("/shipping");
@@ -14,7 +18,7 @@ const PaymentScreen = ({ history }) => {
    const [paymentMethod, setPaymentMethod] = useState("PayPal");
 
    const dispatch = useDispatch();
-   const submitHandler = (e) => {
+   const submitHandler = (e: any) => {
       e.preventDefault();
       dispatch(savePaymentMethod(paymentMethod));
       history.push("/placeOrder");

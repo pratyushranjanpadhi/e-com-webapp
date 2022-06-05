@@ -8,11 +8,15 @@ import Loader from "../components/Loader";
 import MyPagination from "../components/MyPagination";
 import Slider from "../components/Slider";
 
-function HomeScreen({ match }) {
+interface Props {
+   match: any;
+}
+
+const HomeScreen: React.FC<Props> = ({ match }) => {
    const pageNumber = match.params.page || 1;
    const dispatch = useDispatch();
 
-   const productList = useSelector((state) => state.productList);
+   const productList = useSelector((state: any) => state.productList);
    const { loading, error, products, page, totalPages } = productList;
 
    useEffect(() => {
@@ -29,7 +33,7 @@ function HomeScreen({ match }) {
          ) : (
             <>
                <Row>
-                  {products.map((product) => (
+                  {products.map((product: any) => (
                      <Col key={product._id} sm={12} md={6} lg={3}>
                         <Product product={product} />
                      </Col>
@@ -40,6 +44,6 @@ function HomeScreen({ match }) {
          )}
       </>
    );
-}
+};
 
 export default HomeScreen;

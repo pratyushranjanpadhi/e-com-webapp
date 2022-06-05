@@ -8,7 +8,12 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUser } from "../actions/userActions";
 import * as actionTypes from "../actionTypes";
 
-function UserEditScreen({ match, history }) {
+interface Props {
+   match: any;
+   history: any;
+}
+
+const UserEditScreen: React.FC<Props> = ({ match, history }) => {
    const userId = match.params.id;
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
@@ -16,10 +21,10 @@ function UserEditScreen({ match, history }) {
 
    const dispatch = useDispatch();
 
-   const userDetails = useSelector((state) => state.userDetails);
+   const userDetails = useSelector((state: any) => state.userDetails);
    const { loading, error, user } = userDetails;
 
-   const userUpdate = useSelector((state) => state.userUpdate);
+   const userUpdate = useSelector((state: any) => state.userUpdate);
    const { loading: updateLoading, success: updateSuccess, error: updateError } = userUpdate;
 
    useEffect(() => {
@@ -37,7 +42,7 @@ function UserEditScreen({ match, history }) {
       }
    }, [dispatch, history, user, updateSuccess, userId]);
 
-   const submitHandler = (e) => {
+   const submitHandler = (e: any) => {
       e.preventDefault();
       dispatch(updateUser({ _id: userId, name, email, isAdmin }));
    };
@@ -96,6 +101,6 @@ function UserEditScreen({ match, history }) {
          </FormContainer>
       </>
    );
-}
+};
 
 export default UserEditScreen;

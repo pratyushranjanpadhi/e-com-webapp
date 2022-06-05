@@ -5,15 +5,18 @@ import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../actions/cartAction";
 
-const ShippingScreen = ({ history }) => {
-   const cart = useSelector((state) => state.cart);
+interface Props {
+   history: any;
+}
+const ShippingScreen: React.FC<Props> = ({ history }) => {
+   const cart = useSelector((state: any) => state.cart);
    const { shippingAddress } = cart;
    const [address, setAddress] = useState(shippingAddress.address);
    const [city, setCity] = useState(shippingAddress.city);
    const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
    const [country, setCountry] = useState(shippingAddress.country);
    const dispatch = useDispatch();
-   const submitHandler = (e) => {
+   const submitHandler = (e: any) => {
       e.preventDefault();
       dispatch(saveShippingAddress({ address, city, postalCode, country }));
       history.push("/payment");

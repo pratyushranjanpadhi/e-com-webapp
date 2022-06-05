@@ -5,13 +5,19 @@ import { Row, Col, ListGroup, Button, Image, Form, Card } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import Message from "../components/Message";
 
-function CartScreen({ match, location, history }) {
+interface Props {
+   match: any;
+   location: any;
+   history: any;
+}
+
+const CartScreen: React.FC<Props> = ({ match, location, history }) => {
    const producId = match.params.id;
    const quantity = location.search ? Number(location.search.split("=")[1]) : 1;
 
    const dispatch = useDispatch();
 
-   const cart = useSelector((state) => state.cart);
+   const cart = useSelector((state: any) => state.cart);
    const { cartItems } = cart;
 
    useEffect(() => {
@@ -20,7 +26,7 @@ function CartScreen({ match, location, history }) {
       }
    }, [dispatch, producId, quantity]);
 
-   const removeItemFromCart = (id) => {
+   const removeItemFromCart = (id: any) => {
       dispatch(removeFromCart(id));
    };
 
@@ -39,7 +45,7 @@ function CartScreen({ match, location, history }) {
                   </Message>
                ) : (
                   <ListGroup variant="flush">
-                     {cartItems.map((item) => (
+                     {cartItems.map((item: any) => (
                         <ListGroup.Item key={item.product}>
                            <Row>
                               <Col md={2}>
@@ -53,7 +59,9 @@ function CartScreen({ match, location, history }) {
                                  <Form.Control
                                     as="select"
                                     value={item.quantity}
-                                    onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}
+                                    onChange={(e) =>
+                                       dispatch(addToCart(item.product, Number(e.target.value)))
+                                    }
                                  >
                                     {[...Array(item.countInStock).keys()].map((p) => (
                                        <option key={p + 1} value={p + 1}>
@@ -82,8 +90,15 @@ function CartScreen({ match, location, history }) {
                <Card>
                   <ListGroup variant="flush">
                      <ListGroup.Item>
-                        <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.quantity, 0)}) items</h2>$
-                        {cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)}
+                        <h2>
+                           Subtotal (
+                           {cartItems.reduce((acc: any, item: any) => acc + item.quantity, 0)})
+                           items
+                        </h2>
+                        $
+                        {cartItems
+                           .reduce((acc: any, item: any) => acc + item.quantity * item.price, 0)
+                           .toFixed(2)}
                      </ListGroup.Item>
                      <ListGroup.Item>
                         <Button className="btn-block" onClick={checkoutHandler}>
@@ -96,6 +111,6 @@ function CartScreen({ match, location, history }) {
          </Row>
       </>
    );
-}
+};
 
 export default CartScreen;
