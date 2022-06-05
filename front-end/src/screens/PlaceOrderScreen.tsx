@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Col, Row, ListGroup, Image, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
-import { createOrder } from "../actions/orderActions";
+import { createOrder } from "../actions/orderAction/orderActions";
 
 interface Props {
    history: any;

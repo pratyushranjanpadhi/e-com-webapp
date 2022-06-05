@@ -4,8 +4,8 @@ import { Button, Form, Row, Col, Table } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getUserDetails, updateUserProfile } from "../actions/userActions";
-import { listMyOrders } from "../actions/orderActions";
+import { getUserDetails, updateUserProfile } from "../actions/userAction/userActions";
+import { listMyOrders } from "../actions/orderAction/orderActions";
 
 interface Props {
    location: any;

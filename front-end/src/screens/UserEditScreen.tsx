@@ -5,7 +5,7 @@ import { Button, Form } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getUserDetails, updateUser } from "../actions/userActions";
+import { getUserDetails, updateUser } from "../actions/userAction/userActions";
 import * as actionTypes from "../actionTypes";
 
 interface Props {

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, ListGroup, Image, Card, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { deliverOrder, getOrderDetails, payOrder } from "../actions/orderActions";
+import { deliverOrder, getOrderDetails, payOrder } from "../actions/orderAction/orderActions";
 import * as actionTypes from "../actionTypes";
 
 interface Props {

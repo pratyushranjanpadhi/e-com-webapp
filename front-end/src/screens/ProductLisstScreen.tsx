@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { deleteProduct, listProduct, createProduct } from "../actions/productAction";
+import { deleteProduct, listProduct, createProduct } from "../actions/productAction/productActions";
 import * as actionTypes from "../actionTypes";
 import MyPagination from "../components/MyPagination";
 

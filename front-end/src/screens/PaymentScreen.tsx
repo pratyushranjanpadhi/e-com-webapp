@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
-import { savePaymentMethod } from "../actions/cartAction";
+import { savePaymentMethod } from "../actions/cartAction/cartAction";
 
 interface Props {
    history: any;

@@ -41,6 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
       res.status(201).json({
          id: user._id,
          name: user.name,
+         email: user.email,
          isAdmin: user.isAdmin,
          token: generateToken(user._id),
       });
@@ -57,6 +58,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       res.json({
          id: user._id,
          name: user.name,
+         email: user.email,
          isAdmin: user.isAdmin,
       });
    } else {
@@ -139,4 +141,13 @@ const updateUserById = asyncHandler(async (req, res) => {
    }
 });
 
-export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers, deleteUser, getUserById, updateUserById };
+export {
+   authUser,
+   registerUser,
+   getUserProfile,
+   updateUserProfile,
+   getUsers,
+   deleteUser,
+   getUserById,
+   updateUserById,
+};
