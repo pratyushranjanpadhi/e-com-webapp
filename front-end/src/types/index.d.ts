@@ -38,6 +38,14 @@ export interface IUser {
    password: string;
 }
 
+export interface IUserResponseDetails {
+   id: string;
+   name: string;
+   emdil: string;
+   isAdming: boolean;
+   token?: string;
+}
+
 export interface IProduct {
    _id?: string;
    price: number;

@@ -1,8 +1,19 @@
 import axios from "axios";
+import { Dispatch } from "redux";
 import * as actionTypes from "../../actionTypes";
+import {
+   UpdateUserProfileDispatchType,
+   UserDeleteDispatchType,
+   UserDetailsDispatchType,
+   UserLoginDispatchType,
+   UserLogoutDispatchType,
+   UserRegisterDispatchType,
+   UsersListDispatchType,
+   UserUpdateDispatchType,
+} from "./userActionsTypes";
 
 //login Action
-const login = (email: any, password: any) => async (dispatch: any) => {
+const login = (email: any, password: any) => async (dispatch: Dispatch<UserLoginDispatchType>) => {
    try {
       dispatch({
          type: actionTypes.USER_LOGIN_REQUEST,
@@ -32,7 +43,7 @@ const login = (email: any, password: any) => async (dispatch: any) => {
 };
 
 //logout Action
-const logout = () => async (dispatch: any) => {
+const logout = () => async (dispatch: Dispatch<UserLogoutDispatchType>) => {
    localStorage.removeItem("userInfo");
    dispatch({
       type: actionTypes.USER_LOGOUT,
@@ -49,108 +60,112 @@ const logout = () => async (dispatch: any) => {
 };
 
 //Register Action
-const register = (name: any, email: any, password: any) => async (dispatch: any) => {
-   try {
-      dispatch({
-         type: actionTypes.USER_REGISTER_REQUEST,
-      });
-      // using this for authorization : sending the header
-      const config = {
-         headers: {
-            "Content-type": "application/json",
-         },
-      };
-      // sending the data for registration
-      const { data } = await axios.post("/api/users", { name, email, password }, config);
-      dispatch({
-         type: actionTypes.USER_REGISTER_SUCCESS,
-         payload: data,
-      });
-      dispatch({
-         type: actionTypes.USER_LOGIN_SUCCESS,
-         payload: data,
-      });
-      localStorage.setItem("userInfo", JSON.stringify(data));
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.USER_REGISTER_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+const register =
+   (name: any, email: any, password: any) =>
+   async (dispatch: Dispatch<UserRegisterDispatchType>) => {
+      try {
+         dispatch({
+            type: actionTypes.USER_REGISTER_REQUEST,
+         });
+         // using this for authorization : sending the header
+         const config = {
+            headers: {
+               "Content-type": "application/json",
+            },
+         };
+         // sending the data for registration
+         const { data } = await axios.post("/api/users", { name, email, password }, config);
+         dispatch({
+            type: actionTypes.USER_REGISTER_SUCCESS,
+            payload: data,
+         });
+         dispatch({
+            type: actionTypes.USER_LOGIN_SUCCESS,
+            payload: data,
+         });
+         localStorage.setItem("userInfo", JSON.stringify(data));
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.USER_REGISTER_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
 //getting the user details action
-const getUserDetails = (id: any) => async (dispatch: any, getState: any) => {
-   try {
-      dispatch({
-         type: actionTypes.USER_DETAILS_REQUEST,
-      });
-      //we are getting this so that we can have access to the token
-      const {
-         userLogin: { userInfo },
-      } = getState();
-      const config = {
-         headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${userInfo.token}`, //using the token here
-         },
-      };
-      // getting the details that we will display on clicking the profile menu
-      const { data } = await axios.get(`/api/users/${id}`, config);
-      dispatch({
-         type: actionTypes.USER_DETAILS_SUCCESS,
-         payload: data,
-      });
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.USER_DETAILS_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+const getUserDetails =
+   (id: any) => async (dispatch: Dispatch<UserDetailsDispatchType>, getState: any) => {
+      try {
+         dispatch({
+            type: actionTypes.USER_DETAILS_REQUEST,
+         });
+         //we are getting this so that we can have access to the token
+         const {
+            userLogin: { userInfo },
+         } = getState();
+         const config = {
+            headers: {
+               "Content-type": "application/json",
+               Authorization: `Bearer ${userInfo.token}`, //using the token here
+            },
+         };
+         // getting the details that we will display on clicking the profile menu
+         const { data } = await axios.get(`/api/users/${id}`, config);
+         dispatch({
+            type: actionTypes.USER_DETAILS_SUCCESS,
+            payload: data,
+         });
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.USER_DETAILS_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
 // updating the user details action
-const updateUserProfile = (user: any) => async (dispatch: any, getState: any) => {
-   try {
-      dispatch({
-         type: actionTypes.USER_PROFILE_UPDATE_REQUEST,
-      });
-      //we are getting this so that we can have access to the token
-      const {
-         userLogin: { userInfo },
-      } = getState();
+const updateUserProfile =
+   (user: any) => async (dispatch: Dispatch<UpdateUserProfileDispatchType>, getState: any) => {
+      try {
+         dispatch({
+            type: actionTypes.USER_PROFILE_UPDATE_REQUEST,
+         });
+         //we are getting this so that we can have access to the token
+         const {
+            userLogin: { userInfo },
+         } = getState();
 
-      //Using this for authorization : sending the header
-      const config = {
-         headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${userInfo.token}`, //using the token here
-         },
-      };
-      // gettig the details that we will display after we update the profile
-      const { data } = await axios.put(`/api/users/profile`, user, config);
-      dispatch({
-         type: actionTypes.USER_PROFILE_UPDATE_SUCCESS,
-         payload: data,
-      });
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.USER_PROFILE_UPDATE_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+         //Using this for authorization : sending the header
+         const config = {
+            headers: {
+               "Content-type": "application/json",
+               Authorization: `Bearer ${userInfo.token}`, //using the token here
+            },
+         };
+         // gettig the details that we will display after we update the profile
+         const { data } = await axios.put(`/api/users/profile`, user, config);
+         dispatch({
+            type: actionTypes.USER_PROFILE_UPDATE_SUCCESS,
+            payload: data,
+         });
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.USER_PROFILE_UPDATE_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
-const listUsers = () => async (dispatch: any, getState: any) => {
+const listUsers = () => async (dispatch: Dispatch<UsersListDispatchType>, getState: any) => {
    try {
       dispatch({
          type: actionTypes.USER_LIST_REQUEST,
@@ -181,72 +196,74 @@ const listUsers = () => async (dispatch: any, getState: any) => {
    }
 };
 
-const deleteUser = (id: any) => async (dispatch: any, getState: any) => {
-   try {
-      dispatch({
-         type: actionTypes.USER_DELETE_REQUEST,
-      });
-      const {
-         userLogin: { userInfo },
-      } = getState();
+const deleteUser =
+   (id: any) => async (dispatch: Dispatch<UserDeleteDispatchType>, getState: any) => {
+      try {
+         dispatch({
+            type: actionTypes.USER_DELETE_REQUEST,
+         });
+         const {
+            userLogin: { userInfo },
+         } = getState();
 
-      //Using this for authorization : sending the header
-      const config = {
-         headers: {
-            Authorization: `Bearer ${userInfo.token}`, //using the token here
-         },
-      };
-      await axios.delete(`/api/users/${id}`, config);
-      dispatch({
-         type: actionTypes.USER_DELETE_SUCCESS,
-      });
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.USER_DELETE_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+         //Using this for authorization : sending the header
+         const config = {
+            headers: {
+               Authorization: `Bearer ${userInfo.token}`, //using the token here
+            },
+         };
+         await axios.delete(`/api/users/${id}`, config);
+         dispatch({
+            type: actionTypes.USER_DELETE_SUCCESS,
+         });
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.USER_DELETE_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
 //
-const updateUser = (user: any) => async (dispatch: any, getState: any) => {
-   try {
-      dispatch({
-         type: actionTypes.USER_UPDATE_REQUEST,
-      });
-      const {
-         userLogin: { userInfo },
-      } = getState();
+const updateUser =
+   (user: any) => async (dispatch: Dispatch<UserUpdateDispatchType>, getState: any) => {
+      try {
+         dispatch({
+            type: actionTypes.USER_UPDATE_REQUEST,
+         });
+         const {
+            userLogin: { userInfo },
+         } = getState();
 
-      //Using this for authorization : sending the header
-      const config = {
-         headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${userInfo.token}`, //using the token here
-         },
-      };
-      const { data } = await axios.put(`/api/users/${user._id}`, user, config);
-      dispatch({
-         type: actionTypes.USER_UPDATE_SUCCESS,
-      });
+         //Using this for authorization : sending the header
+         const config = {
+            headers: {
+               "Content-type": "application/json",
+               Authorization: `Bearer ${userInfo.token}`, //using the token here
+            },
+         };
+         const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+         dispatch({
+            type: actionTypes.USER_UPDATE_SUCCESS,
+         });
 
-      dispatch({
-         type: actionTypes.USER_DETAILS_SUCCESS,
-         payload: data,
-      });
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.USER_UPDATE_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+         dispatch({
+            type: actionTypes.USER_DETAILS_SUCCESS,
+            payload: data,
+         });
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.USER_UPDATE_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
 export {
    login,
