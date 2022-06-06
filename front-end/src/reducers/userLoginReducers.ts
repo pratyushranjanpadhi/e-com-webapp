@@ -1,6 +1,34 @@
+import {
+   UpdateUserProfileDispatchType,
+   UserDeleteDispatchType,
+   UserDetailsDispatchType,
+   UserLoginDispatchType,
+   UserRegisterDispatchType,
+   UsersListDispatchType,
+   UserUpdateDispatchType,
+} from "actions/userAction/userActionsTypes";
 import * as actionTypes from "../actionTypes";
+import {
+   IUserDeleteState,
+   IUserDetailsState,
+   IUserListState,
+   IUserLoginState,
+   IUserProfileUpdateState,
+   IUserRegisterState,
+   IUserUpdateState,
+} from "./types";
 
-const userLoginReducer = (state = {}, action: any) => {
+const userDetailsDefaultState: IUserDetailsState = {
+   user: {
+      id: "",
+      name: "",
+      email: "",
+      isAdmin: false,
+      password: "",
+   },
+};
+
+const userLoginReducer = (state: IUserLoginState = {}, action: UserLoginDispatchType) => {
    switch (action.type) {
       case actionTypes.USER_LOGIN_REQUEST:
          return { loading: true };
@@ -15,7 +43,7 @@ const userLoginReducer = (state = {}, action: any) => {
    }
 };
 
-const userRegisterReducer = (state = {}, action: any) => {
+const userRegisterReducer = (state: IUserRegisterState = {}, action: UserRegisterDispatchType) => {
    switch (action.type) {
       case actionTypes.USER_REGISTER_REQUEST:
          return {
@@ -36,7 +64,10 @@ const userRegisterReducer = (state = {}, action: any) => {
    }
 };
 
-const userDetailsReducer = (state = { user: {} }, action: any) => {
+const userDetailsReducer = (
+   state: IUserDetailsState = userDetailsDefaultState,
+   action: UserDetailsDispatchType
+) => {
    switch (action.type) {
       case actionTypes.USER_DETAILS_REQUEST:
          return {
@@ -60,7 +91,10 @@ const userDetailsReducer = (state = { user: {} }, action: any) => {
    }
 };
 
-const userProfileUpdateReducer = (state = {}, action: any) => {
+const userProfileUpdateReducer = (
+   state: IUserProfileUpdateState = {},
+   action: UpdateUserProfileDispatchType
+) => {
    switch (action.type) {
       case actionTypes.USER_PROFILE_UPDATE_REQUEST:
          return {
@@ -82,7 +116,7 @@ const userProfileUpdateReducer = (state = {}, action: any) => {
    }
 };
 
-const userListReducer = (state = { users: [] }, action: any) => {
+const userListReducer = (state: IUserListState = { users: [] }, action: UsersListDispatchType) => {
    switch (action.type) {
       case actionTypes.USER_LIST_REQUEST:
          return { loading: true };
@@ -97,7 +131,7 @@ const userListReducer = (state = { users: [] }, action: any) => {
    }
 };
 
-const userDeleteReducer = (state = {}, action: any) => {
+const userDeleteReducer = (state: IUserDeleteState = {}, action: UserDeleteDispatchType) => {
    switch (action.type) {
       case actionTypes.USER_DELETE_REQUEST:
          return { loading: true };
@@ -110,7 +144,10 @@ const userDeleteReducer = (state = {}, action: any) => {
    }
 };
 
-const userUpdateReducer = (state = { user: {} }, action: any) => {
+const userUpdateReducer = (
+   state: IUserUpdateState = userDetailsDefaultState,
+   action: UserUpdateDispatchType
+) => {
    switch (action.type) {
       case actionTypes.USER_UPDATE_REQUEST:
          return { loading: true };

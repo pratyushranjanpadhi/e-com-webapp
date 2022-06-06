@@ -1,4 +1,13 @@
-import { ICartItem, ICreateOrder, IOrder, IPaymentMethod, IProduct, IShippingAddress } from "types";
+import {
+   ICartItem,
+   ICreateOrder,
+   IOrder,
+   IPaymentMethod,
+   IProduct,
+   IShippingAddress,
+   IUser,
+   IUserResponseDetails,
+} from "types";
 
 export interface ICartState {
    cartItems: ICartItem[];
@@ -85,5 +94,49 @@ export interface IProductCreateReviewState {
 export interface ITopRatedProductState {
    loading?: boolean;
    products: IProduct[];
+   error?: string;
+}
+
+export interface IUserLoginState {
+   loading?: boolean;
+   userInfo?: IUserResponseDetails;
+   error?: string;
+}
+
+export interface IUserRegisterState {
+   loading?: boolean;
+   userInfo?: IUserResponseDetails;
+   error?: string;
+}
+
+export interface IUserDetailsState {
+   loading?: boolean;
+   user?: IUser | IUserResponseDetails;
+   error?: string;
+}
+
+export interface IUserProfileUpdateState {
+   loading?: boolean;
+   userInfo?: IUserResponseDetails;
+   success?: boolean;
+   error?: string;
+}
+
+export interface IUserListState {
+   loading?: boolean;
+   users: IUser[];
+   error?: string;
+}
+
+export interface IUserDeleteState {
+   loading?: boolean;
+   success?: boolean;
+   error?: string;
+}
+
+export interface IUserUpdateState {
+   loading?: boolean;
+   user?: IUser | IUserResponseDetails;
+   success?: boolean;
    error?: string;
 }
