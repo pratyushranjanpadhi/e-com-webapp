@@ -20,3 +20,9 @@ export interface SavePaymentMethodDispatchType {
    type: typeof actionTypes.CART_SAVE_PAYMENT_METHOD;
    payload: IPaymentMethod;
 }
+
+export type CartDispatchType =
+   | AddToCartDispatchType
+   | RemoveFromCartDispatchType
+   | SaveShippingAddressDispatchType
+   | SavePaymentMethodDispatchType;
