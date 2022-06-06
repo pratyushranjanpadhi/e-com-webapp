@@ -5,9 +5,9 @@ import {
    CreateProductDispatchType,
    CreateProductReviewDispatchType,
    DeleteProductDispatchType,
-   ListProductDetailsDispatchType,
    ListProductsDispatchType,
    ListTopRatedProductDispatchType,
+   ProductDetailsDispatchType,
    UpdateProductDispatchType,
 } from "./productActionsType";
 
@@ -31,22 +31,21 @@ const listProduct =
    };
 
 // action for getting a single product that we click on
-const listProductDetails =
-   (id: any) => async (dispatch: Dispatch<ListProductDetailsDispatchType>) => {
-      try {
-         dispatch({ type: actionTypes.PRODUCT_DETAILS_REQUEST });
-         const { data } = await axios.get(`/api/products/${id}`);
-         dispatch({ type: actionTypes.PRODUCT_DETAILS_SUCCESS, payload: data });
-      } catch (error: any) {
-         dispatch({
-            type: actionTypes.PRODUCT_DETAILS_FAIL,
-            payload:
-               error.response && error.response.data.message
-                  ? error.response.data.message
-                  : error.message,
-         });
-      }
-   };
+const listProductDetails = (id: any) => async (dispatch: Dispatch<ProductDetailsDispatchType>) => {
+   try {
+      dispatch({ type: actionTypes.PRODUCT_DETAILS_REQUEST });
+      const { data } = await axios.get(`/api/products/${id}`);
+      dispatch({ type: actionTypes.PRODUCT_DETAILS_SUCCESS, payload: data });
+   } catch (error: any) {
+      dispatch({
+         type: actionTypes.PRODUCT_DETAILS_FAIL,
+         payload:
+            error.response && error.response.data.message
+               ? error.response.data.message
+               : error.message,
+      });
+   }
+};
 
 const deleteProduct =
    (id: any) => async (dispatch: Dispatch<DeleteProductDispatchType>, getState: any) => {

@@ -15,7 +15,11 @@ export interface UserLoginFail {
    payload: string;
 }
 
-export type UserLoginDispatchType = UserLoginRequest | UserLoginSuccess | UserLoginFail;
+export type UserLoginDispatchType =
+   | UserLoginRequest
+   | UserLoginSuccess
+   | UserLoginFail
+   | UserLogout;
 export interface UserLogout {
    type: typeof actionTypes.USER_LOGOUT;
 }
@@ -72,7 +76,15 @@ export interface UserDetailsFail {
    payload: string;
 }
 
-export type UserDetailsDispatchType = UserDetailsRequest | UserDetailsSuccess | UserDetailsFail;
+export interface UserDetailsReset {
+   type: typeof actionTypes.USER_DETAILS_RESET;
+}
+
+export type UserDetailsDispatchType =
+   | UserDetailsRequest
+   | UserDetailsSuccess
+   | UserDetailsFail
+   | UserDetailsReset;
 
 export interface UpdateUserProfileRequest {
    type: typeof actionTypes.USER_PROFILE_UPDATE_REQUEST;
@@ -107,7 +119,11 @@ export interface UsersListFail {
    payload: string;
 }
 
-export type UsersListDispatchType = UsersListRequest | UsersListSuccess | UsersListFail;
+export type UsersListDispatchType =
+   | UsersListRequest
+   | UsersListSuccess
+   | UsersListFail
+   | UserDetailsReset;
 
 export interface UserDeleteRequest {
    type: typeof actionTypes.USER_DELETE_REQUEST;
@@ -137,8 +153,13 @@ export interface UserUpdateFail {
    payload: string;
 }
 
+export interface UserUpdateReset {
+   type: typeof actionTypes.USER_UPDATE_RESET;
+}
+
 export type UserUpdateDispatchType =
    | UserUpdateRequest
    | UserUpdateSuccess
    | UserUpdateFail
+   | UserUpdateReset
    | UserDetailsSuccess;

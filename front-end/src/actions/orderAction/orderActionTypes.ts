@@ -53,7 +53,11 @@ export interface OrderPayFail {
    payload: string;
 }
 
-export type OrderPayDispatchType = OrderPayRequest | OrderPaySuccess | OrderPayFail;
+export interface OrderPayReset {
+   type: typeof actionTypes.ORDER_PAY_RESET;
+}
+
+export type OrderPayDispatchType = OrderPayRequest | OrderPaySuccess | OrderPayFail | OrderPayReset;
 
 // DeliverOrder
 export interface OrderDeliverRequest {
@@ -70,7 +74,15 @@ export interface OrderDeliverFail {
    payload: string;
 }
 
-export type OrderDeliverDispatchType = OrderDeliverRequest | OrderDeliverSuccess | OrderDeliverFail;
+export interface OrderDeliverReset {
+   type: typeof actionTypes.ORDER_DELIVER_RESET;
+}
+
+export type OrderDeliverDispatchType =
+   | OrderDeliverRequest
+   | OrderDeliverSuccess
+   | OrderDeliverFail
+   | OrderDeliverReset;
 
 // MyOrderList
 export interface ListMyOrdersRequest {
@@ -87,7 +99,15 @@ export interface ListMyOrdersFail {
    payload: string;
 }
 
-export type ListMyOrdersDispatchType = ListMyOrdersRequest | ListMyOrdersSuccess | ListMyOrdersFail;
+export interface ListMyOrderReset {
+   type: typeof actionTypes.MY_ORDER_LIST_RESET;
+}
+
+export type ListMyOrdersDispatchType =
+   | ListMyOrdersRequest
+   | ListMyOrdersSuccess
+   | ListMyOrdersFail
+   | ListMyOrderReset;
 
 // ListAllOrders
 export interface ListAllOrdersRequest {

@@ -1,6 +1,28 @@
+import {
+   CreateOrderDispatchType,
+   GetOrderDetailsDispatchType,
+   ListAllOrdersDispatchType,
+   ListMyOrdersDispatchType,
+   OrderDeliverDispatchType,
+   OrderPayDispatchType,
+} from "actions/orderAction/orderActionTypes";
+import {
+   ICreateOrderState,
+   IMyOrderListState,
+   IOrderDeliverState,
+   IOrderDetailsState,
+   IOrderListState,
+   IOrderPayState,
+} from "reducers/types";
 import * as actionTypes from "../actionTypes";
 
-const createOrderReducer = (state = {}, action: any) => {
+const orderDetailsDefaultState: IOrderDetailsState = {
+   loading: true,
+   order: [],
+   error: "",
+};
+
+const createOrderReducer = (state: ICreateOrderState = {}, action: CreateOrderDispatchType) => {
    switch (action.type) {
       case actionTypes.CREATE_ORDER_REQUEST:
          return {
@@ -23,8 +45,8 @@ const createOrderReducer = (state = {}, action: any) => {
 };
 
 const orderDetailsReducer = (
-   state = { loading: true, orderItems: [], shippingAddress: {} },
-   action: any
+   state: IOrderDetailsState = orderDetailsDefaultState,
+   action: GetOrderDetailsDispatchType
 ) => {
    switch (action.type) {
       case actionTypes.ORDER_DETAILS_REQUEST:
@@ -47,7 +69,7 @@ const orderDetailsReducer = (
    }
 };
 
-const orderPayReducer = (state = {}, action: any) => {
+const orderPayReducer = (state: IOrderPayState = {}, action: OrderPayDispatchType) => {
    switch (action.type) {
       case actionTypes.ORDER_PAY_REQUEST:
          return {
@@ -70,7 +92,7 @@ const orderPayReducer = (state = {}, action: any) => {
    }
 };
 
-const orderDeliverReducer = (state = {}, action: any) => {
+const orderDeliverReducer = (state: IOrderDeliverState = {}, action: OrderDeliverDispatchType) => {
    switch (action.type) {
       case actionTypes.ORDER_DELIVER_REQUEST:
          return {
@@ -93,7 +115,10 @@ const orderDeliverReducer = (state = {}, action: any) => {
    }
 };
 
-const myOrderListReducer = (state = { orders: [] }, action: any) => {
+const myOrderListReducer = (
+   state: IMyOrderListState = { orders: [] },
+   action: ListMyOrdersDispatchType
+) => {
    switch (action.type) {
       case actionTypes.MY_ORDER_LIST_REQUEST:
          return {
@@ -116,7 +141,10 @@ const myOrderListReducer = (state = { orders: [] }, action: any) => {
    }
 };
 
-const orderListReducer = (state = { orders: [] }, action: any) => {
+const orderListReducer = (
+   state: IOrderListState = { orders: [] },
+   action: ListAllOrdersDispatchType
+) => {
    switch (action.type) {
       case actionTypes.ORDER_LIST_REQUEST:
          return {
