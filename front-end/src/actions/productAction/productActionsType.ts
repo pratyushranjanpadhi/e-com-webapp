@@ -10,7 +10,7 @@ export interface ListProductsSuccess {
    payload: {
       products: IProduct[];
       page: number;
-      pageSize: number;
+      totalPages: number;
    };
 }
 
@@ -21,24 +21,24 @@ export interface ListProductsFail {
 
 export type ListProductsDispatchType = ListProductsRequest | ListProductsSuccess | ListProductsFail;
 
-export interface ListProductDetailsRequest {
+export interface ProductDetailsRequest {
    type: typeof actionTypes.PRODUCT_DETAILS_REQUEST;
 }
 
-export interface ListProductDetailsSuccess {
+export interface ProductDetailsSuccess {
    type: typeof actionTypes.PRODUCT_DETAILS_SUCCESS;
    payload: IProduct;
 }
 
-export interface ListProductDetailsFail {
+export interface ProductDetailsFail {
    type: typeof actionTypes.PRODUCT_DETAILS_FAIL;
    payload: string;
 }
 
-export type ListProductDetailsDispatchType =
-   | ListProductDetailsRequest
-   | ListProductDetailsSuccess
-   | ListProductDetailsFail;
+export type ProductDetailsDispatchType =
+   | ProductDetailsRequest
+   | ProductDetailsSuccess
+   | ProductDetailsFail;
 
 export interface DeleteProductRequest {
    type: typeof actionTypes.PRODUCT_DELETE_REQUEST;
@@ -53,10 +53,15 @@ export interface DeleteProductFail {
    payload: string;
 }
 
+export interface DeleteProductReset {
+   type: typeof actionTypes.PRODUCT_DELETE_RESET;
+}
+
 export type DeleteProductDispatchType =
    | DeleteProductRequest
    | DeleteProductSuccess
-   | DeleteProductFail;
+   | DeleteProductFail
+   | DeleteProductReset;
 
 export interface CreateProductRequest {
    type: typeof actionTypes.PRODUCT_CREATE_REQUEST;
@@ -72,10 +77,15 @@ export interface CreateProductFail {
    payload: string;
 }
 
+export interface CreateProductReset {
+   type: typeof actionTypes.PRODUCT_CREATE_RESET;
+}
+
 export type CreateProductDispatchType =
    | CreateProductRequest
    | CreateProductSuccess
-   | CreateProductFail;
+   | CreateProductFail
+   | CreateProductReset;
 
 export interface UpdateProductRequest {
    type: typeof actionTypes.PRODUCT_UPDATE_REQUEST;
@@ -91,10 +101,15 @@ export interface UpdateProductFail {
    payload: string;
 }
 
+export interface UpdateProductReset {
+   type: typeof actionTypes.PRODUCT_UPDATE_RESET;
+}
+
 export type UpdateProductDispatchType =
    | UpdateProductRequest
    | UpdateProductSuccess
-   | UpdateProductFail;
+   | UpdateProductFail
+   | UpdateProductReset;
 
 export interface CreateProductReviewRequest {
    type: typeof actionTypes.PRODUCT_CREATE_REVIEW_REQUEST;
@@ -109,10 +124,15 @@ export interface CreateProductReviewFail {
    payload: string;
 }
 
+export interface CreateProductReviewReset {
+   type: typeof actionTypes.PRODUCT_CREATE_REVIEW_RESET;
+}
+
 export type CreateProductReviewDispatchType =
    | CreateProductReviewRequest
    | CreateProductReviewSuccess
-   | CreateProductReviewFail;
+   | CreateProductReviewFail
+   | CreateProductReviewReset;
 
 export interface ListTopRatedProductRequest {
    type: typeof actionTypes.PRODUCT_TOP_RATED_REQUEST;

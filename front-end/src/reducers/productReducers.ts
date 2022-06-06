@@ -1,6 +1,42 @@
+import {
+   CreateProductDispatchType,
+   CreateProductReviewDispatchType,
+   DeleteProductDispatchType,
+   ListProductsDispatchType,
+   ListTopRatedProductDispatchType,
+   ProductDetailsDispatchType,
+   UpdateProductDispatchType,
+} from "actions/productAction/productActionsType";
+import { IProduct } from "types";
 import * as actionTypes from "../actionTypes";
+import {
+   IProductCreateReviewState,
+   IProductCreateState,
+   IProductDeleteState,
+   IProductDetailsState,
+   IProductListState,
+   IProductUpdateState,
+   ITopRatedProductState,
+} from "./types";
 
-const prodcutListReducer = (state = { products: [] }, action: any) => {
+const productDefaultState: IProduct = {
+   price: 0,
+   countInStock: 0,
+   rating: 0,
+   numReviews: 0,
+   name: "",
+   image: "",
+   description: "",
+   brand: "",
+   category: "",
+   user: "",
+   review: [],
+};
+
+const prodcutListReducer = (
+   state: IProductListState = { products: [] },
+   action: ListProductsDispatchType
+) => {
    switch (action.type) {
       case actionTypes.PRODUCT_LIST_REQUEST:
          return { loading: true, products: [] };
@@ -18,7 +54,10 @@ const prodcutListReducer = (state = { products: [] }, action: any) => {
    }
 };
 
-const productDetailsReducer = (state = { product: { review: [] } }, action: any) => {
+const productDetailsReducer = (
+   state: IProductDetailsState = { product: productDefaultState },
+   action: ProductDetailsDispatchType
+) => {
    switch (action.type) {
       case actionTypes.PRODUCT_DETAILS_REQUEST:
          return { loading: true, ...state };
@@ -31,7 +70,10 @@ const productDetailsReducer = (state = { product: { review: [] } }, action: any)
    }
 };
 
-const productDeleteReducer = (state = {}, action: any) => {
+const productDeleteReducer = (
+   state: IProductDeleteState = {},
+   action: DeleteProductDispatchType
+) => {
    switch (action.type) {
       case actionTypes.PRODUCT_DELETE_REQUEST:
          return { loading: true };
@@ -46,7 +88,10 @@ const productDeleteReducer = (state = {}, action: any) => {
    }
 };
 
-const productCreateReducer = (state = {}, action: any) => {
+const productCreateReducer = (
+   state: IProductCreateState = {},
+   action: CreateProductDispatchType
+) => {
    switch (action.type) {
       case actionTypes.PRODUCT_CREATE_REQUEST:
          return { loading: true };
@@ -61,7 +106,10 @@ const productCreateReducer = (state = {}, action: any) => {
    }
 };
 
-const productUpdateReducer = (state = { product: {} }, action: any) => {
+const productUpdateReducer = (
+   state: IProductUpdateState = { product: productDefaultState },
+   action: UpdateProductDispatchType
+) => {
    switch (action.type) {
       case actionTypes.PRODUCT_UPDATE_REQUEST:
          return { loading: true };
@@ -76,7 +124,10 @@ const productUpdateReducer = (state = { product: {} }, action: any) => {
    }
 };
 
-const productCreateReviewReducer = (state = {}, action: any) => {
+const productCreateReviewReducer = (
+   state: IProductCreateReviewState = {},
+   action: CreateProductReviewDispatchType
+) => {
    switch (action.type) {
       case actionTypes.PRODUCT_CREATE_REVIEW_REQUEST:
          return { loading: true };
@@ -91,7 +142,10 @@ const productCreateReviewReducer = (state = {}, action: any) => {
    }
 };
 
-const topRatedProductsReducer = (state = { products: [] }, action: any) => {
+const topRatedProductsReducer = (
+   state: ITopRatedProductState = { products: [] },
+   action: ListTopRatedProductDispatchType
+) => {
    switch (action.type) {
       case actionTypes.PRODUCT_TOP_RATED_REQUEST:
          return { loading: true, products: [] };
