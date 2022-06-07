@@ -23,8 +23,8 @@ export interface ICreateOrderState {
 }
 
 export interface IOrderDetailsState {
-   loading: boolean;
-   order?: IOrder[];
+   loading?: boolean;
+   order?: IOrder;
    error?: string;
 }
 
@@ -42,19 +42,19 @@ export interface IOrderDeliverState {
 
 export interface IMyOrderListState {
    loading?: boolean;
-   orders: IOrder[];
+   orders?: IOrder[];
    error?: string;
 }
 
 export interface IOrderListState {
    loading?: boolean;
-   orders: IOrder[];
+   orders?: IOrder[];
    error?: string;
 }
 
 export interface IProductListState {
    loading?: boolean;
-   products: IProduct[];
+   products?: IProduct[];
    page?: number;
    totalPages?: number;
    error?: string;
@@ -62,7 +62,7 @@ export interface IProductListState {
 
 export interface IProductDetailsState {
    loading?: boolean;
-   product: IProduct;
+   product?: IProduct;
    error?: string;
 }
 
@@ -80,7 +80,7 @@ export interface IProductCreateState {
 
 export interface IProductUpdateState {
    loading?: boolean;
-   product: IProduct;
+   product?: IProduct;
    success?: boolean;
    error?: string;
 }
@@ -93,7 +93,7 @@ export interface IProductCreateReviewState {
 
 export interface ITopRatedProductState {
    loading?: boolean;
-   products: IProduct[];
+   products?: IProduct[];
    error?: string;
 }
 
@@ -124,7 +124,7 @@ export interface IUserProfileUpdateState {
 
 export interface IUserListState {
    loading?: boolean;
-   users: IUser[];
+   users?: IUser[];
    error?: string;
 }
 

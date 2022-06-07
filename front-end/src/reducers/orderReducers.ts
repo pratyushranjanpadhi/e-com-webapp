@@ -17,9 +17,21 @@ import {
 import * as actionTypes from "../actionTypes";
 
 const orderDetailsDefaultState: IOrderDetailsState = {
-   loading: true,
-   order: [],
-   error: "",
+   order: {
+      taxPrice: "",
+      shippingPrice: "",
+      totalPrice: "",
+      isPaid: false,
+      isDelivered: false,
+      orderItems: [],
+      user: {
+         name: "",
+         email: "",
+         password: "",
+         isAdmin: false,
+      },
+      paymentMethod: "",
+   },
 };
 
 const createOrderReducer = (state: ICreateOrderState = {}, action: CreateOrderDispatchType) => {

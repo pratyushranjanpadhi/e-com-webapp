@@ -8,6 +8,7 @@ import {
    SavePaymentMethodDispatchType,
    SaveShippingAddressDispatchType,
 } from "./cartActionsTypes";
+import { ApplicationState } from "store";
 
 // action to add to the cart
 const addToCart =

@@ -28,6 +28,54 @@ import {
    userDeleteReducer,
    userUpdateReducer,
 } from "./reducers/userLoginReducers";
+import {
+   ICartState,
+   ICreateOrderState,
+   IMyOrderListState,
+   IOrderDeliverState,
+   IOrderDetailsState,
+   IOrderListState,
+   IOrderPayState,
+   IProductCreateReviewState,
+   IProductCreateState,
+   IProductDeleteState,
+   IProductDetailsState,
+   IProductListState,
+   IProductUpdateState,
+   ITopRatedProductState,
+   IUserDeleteState,
+   IUserDetailsState,
+   IUserListState,
+   IUserLoginState,
+   IUserProfileUpdateState,
+   IUserRegisterState,
+   IUserUpdateState,
+} from "reducers/types";
+import { ICartItem, IShippingAddress, IUserResponseDetails } from "types";
+
+export interface ApplicationState {
+   productList?: IProductListState;
+   productDetails?: IProductDetailsState;
+   productDelete?: IProductDeleteState;
+   productCreate?: IProductCreateState;
+   productUpdate?: IProductUpdateState;
+   productCreateReview?: IProductCreateReviewState;
+   topRatedProducts?: ITopRatedProductState;
+   cart: ICartState;
+   userLogin: IUserLoginState;
+   userRegister?: IUserRegisterState;
+   userDetails?: IUserDetailsState;
+   userProfileUpdate?: IUserProfileUpdateState;
+   userList?: IUserListState;
+   userDelete?: IUserDeleteState;
+   userUpdate?: IUserUpdateState;
+   createOrder?: ICreateOrderState;
+   orderDetails?: IOrderDetailsState;
+   orderPay?: IOrderPayState;
+   orderDeliver?: IOrderDeliverState;
+   myOrderList?: IMyOrderListState;
+   orderList?: IOrderListState;
+}
 
 const reducer = combineReducers({
    productList: prodcutListReducer,
@@ -53,17 +101,22 @@ const reducer = combineReducers({
    orderList: orderListReducer,
 });
 console.log();
-const cartItemsFromStorage = localStorage.getItem("cartItems")
+const cartItemsFromStorage: ICartItem[] = localStorage.getItem("cartItems")
    ? JSON.parse(localStorage.getItem("cartItems") || "")
    : [];
-const userInfoFromStorage = localStorage.getItem("userInfo")
+const userInfoFromStorage: IUserResponseDetails = localStorage.getItem("userInfo")
    ? JSON.parse(localStorage.getItem("userInfo") || "")
-   : null;
-const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+   : undefined;
+const shippingAddressFromStorage: IShippingAddress = localStorage.getItem("shippingAddress")
    ? JSON.parse(localStorage.getItem("shippingAddress") || "")
-   : {};
+   : {
+        address: "",
+        city: "",
+        postalCode: "",
+        country: "",
+     };
 
-const initialState: any = {
+const initialState: ApplicationState = {
    cart: { cartItems: cartItemsFromStorage, shippingAddress: shippingAddressFromStorage },
    userLogin: { userInfo: userInfoFromStorage },
 };

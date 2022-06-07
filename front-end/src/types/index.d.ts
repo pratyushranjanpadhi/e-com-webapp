@@ -41,8 +41,8 @@ export interface IUser {
 export interface IUserResponseDetails {
    id: string;
    name: string;
-   emdil: string;
-   isAdming: boolean;
+   email: string;
+   isAdmin: boolean;
    token?: string;
 }
 

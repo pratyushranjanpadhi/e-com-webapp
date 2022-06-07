@@ -24,7 +24,6 @@ const userDetailsDefaultState: IUserDetailsState = {
       name: "",
       email: "",
       isAdmin: false,
-      password: "",
    },
 };
 
@@ -85,7 +84,7 @@ const userDetailsReducer = (
             error: action.payload,
          };
       case actionTypes.USER_DETAILS_RESET:
-         return { user: {} };
+         return { user: state.user };
       default:
          return state;
    }
@@ -156,7 +155,7 @@ const userUpdateReducer = (
       case actionTypes.USER_UPDATE_FAIL:
          return { loading: false, error: action.payload };
       case actionTypes.USER_UPDATE_RESET:
-         return { user: {} };
+         return { user: state.user };
       default:
          return state;
    }
