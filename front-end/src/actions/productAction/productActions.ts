@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { ApplicationState } from "store";
 import * as actionTypes from "../../actionTypes";
 import {
    CreateProductDispatchType,
@@ -48,7 +49,8 @@ const listProductDetails = (id: any) => async (dispatch: Dispatch<ProductDetails
 };
 
 const deleteProduct =
-   (id: any) => async (dispatch: Dispatch<DeleteProductDispatchType>, getState: any) => {
+   (id: any) =>
+   async (dispatch: Dispatch<DeleteProductDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_DELETE_REQUEST });
          const {
@@ -56,7 +58,7 @@ const deleteProduct =
          } = getState();
          const config = {
             headers: {
-               Authorization: `Bearer ${userInfo.token}`,
+               Authorization: `Bearer ${userInfo?.token}`,
             },
          };
          axios.delete(`/api/products/${id}`, config);
@@ -73,7 +75,8 @@ const deleteProduct =
    };
 
 const createProduct =
-   () => async (dispatch: Dispatch<CreateProductDispatchType>, getState: any) => {
+   () =>
+   async (dispatch: Dispatch<CreateProductDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_CREATE_REQUEST });
          const {
@@ -81,7 +84,7 @@ const createProduct =
          } = getState();
          const config = {
             headers: {
-               Authorization: `Bearer ${userInfo.token}`,
+               Authorization: `Bearer ${userInfo?.token}`,
             },
          };
 
@@ -99,7 +102,8 @@ const createProduct =
    };
 
 const updateProduct =
-   (product: any) => async (dispatch: Dispatch<UpdateProductDispatchType>, getState: any) => {
+   (product: any) =>
+   async (dispatch: Dispatch<UpdateProductDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_UPDATE_REQUEST });
          const {
@@ -108,7 +112,7 @@ const updateProduct =
          const config = {
             headers: {
                "Content-type": "application/json",
-               Authorization: `Bearer ${userInfo.token}`,
+               Authorization: `Bearer ${userInfo?.token}`,
             },
          };
 
@@ -127,7 +131,10 @@ const updateProduct =
 
 const createProductReview =
    (productId: any, review: any) =>
-   async (dispatch: Dispatch<CreateProductReviewDispatchType>, getState: any) => {
+   async (
+      dispatch: Dispatch<CreateProductReviewDispatchType>,
+      getState: () => ApplicationState
+   ) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_CREATE_REVIEW_REQUEST });
          const {
@@ -136,7 +143,7 @@ const createProductReview =
          const config = {
             headers: {
                "Content-type": "application/json",
-               Authorization: `Bearer ${userInfo.token}`,
+               Authorization: `Bearer ${userInfo?.token}`,
             },
          };
 

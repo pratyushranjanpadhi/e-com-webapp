@@ -28,7 +28,6 @@ const orderDetailsDefaultState: IOrderDetailsState = {
          name: "",
          email: "",
          password: "",
-         isAdmin: false,
       },
       paymentMethod: "",
    },

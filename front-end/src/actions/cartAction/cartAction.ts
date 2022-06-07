@@ -13,7 +13,7 @@ import { ApplicationState } from "store";
 // action to add to the cart
 const addToCart =
    (id: string, quantity: number) =>
-   async (dispatch: Dispatch<AddToCartDispatchType>, getState: any) => {
+   async (dispatch: Dispatch<AddToCartDispatchType>, getState: () => ApplicationState) => {
       const { data } = await axios.get(`/api/products/${id}`);
       dispatch({
          type: actionTypes.CART_ADD_ITEM,
@@ -31,7 +31,8 @@ const addToCart =
 
 // action to remove from cart
 const removeFromCart =
-   (id: string) => (dispatch: Dispatch<RemoveFromCartDispatchType>, getState: any) => {
+   (id: string) =>
+   (dispatch: Dispatch<RemoveFromCartDispatchType>, getState: () => ApplicationState) => {
       dispatch({
          type: actionTypes.CART_REMOVE_ITEM,
          payload: id,

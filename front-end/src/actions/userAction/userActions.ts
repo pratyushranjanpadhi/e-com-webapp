@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { ApplicationState } from "store";
+import { IUser, IUserResponseDetails } from "types";
 import * as actionTypes from "../../actionTypes";
 import {
    UpdateUserProfileDispatchType,
@@ -13,34 +15,35 @@ import {
 } from "./userActionsTypes";
 
 //login Action
-const login = (email: any, password: any) => async (dispatch: Dispatch<UserLoginDispatchType>) => {
-   try {
-      dispatch({
-         type: actionTypes.USER_LOGIN_REQUEST,
-      });
+const login =
+   (email: string, password: string) => async (dispatch: Dispatch<UserLoginDispatchType>) => {
+      try {
+         dispatch({
+            type: actionTypes.USER_LOGIN_REQUEST,
+         });
 
-      const config = {
-         headers: {
-            "Content-type": "application/json",
-         },
-      };
-      const { data } = await axios.post("/api/users/login/", { email, password }, config);
+         const config = {
+            headers: {
+               "Content-type": "application/json",
+            },
+         };
+         const { data } = await axios.post("/api/users/login/", { email, password }, config);
 
-      dispatch({
-         type: actionTypes.USER_LOGIN_SUCCESS,
-         payload: data,
-      });
-      localStorage.setItem("userInfo", JSON.stringify(data));
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.USER_LOGIN_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+         dispatch({
+            type: actionTypes.USER_LOGIN_SUCCESS,
+            payload: data,
+         });
+         localStorage.setItem("userInfo", JSON.stringify(data));
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.USER_LOGIN_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
 //logout Action
 const logout = () => async (dispatch: Dispatch<UserLogoutDispatchType>) => {
@@ -61,7 +64,7 @@ const logout = () => async (dispatch: Dispatch<UserLogoutDispatchType>) => {
 
 //Register Action
 const register =
-   (name: any, email: any, password: any) =>
+   (name: string, email: string, password: string) =>
    async (dispatch: Dispatch<UserRegisterDispatchType>) => {
       try {
          dispatch({
@@ -97,7 +100,8 @@ const register =
 
 //getting the user details action
 const getUserDetails =
-   (id: any) => async (dispatch: Dispatch<UserDetailsDispatchType>, getState: any) => {
+   (id: string) =>
+   async (dispatch: Dispatch<UserDetailsDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
             type: actionTypes.USER_DETAILS_REQUEST,
@@ -109,7 +113,7 @@ const getUserDetails =
          const config = {
             headers: {
                "Content-type": "application/json",
-               Authorization: `Bearer ${userInfo.token}`, //using the token here
+               Authorization: `Bearer ${userInfo?.token}`, //using the token here
             },
          };
          // getting the details that we will display on clicking the profile menu
@@ -131,7 +135,8 @@ const getUserDetails =
 
 // updating the user details action
 const updateUserProfile =
-   (user: any) => async (dispatch: Dispatch<UpdateUserProfileDispatchType>, getState: any) => {
+   (user: IUser) =>
+   async (dispatch: Dispatch<UpdateUserProfileDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
             type: actionTypes.USER_PROFILE_UPDATE_REQUEST,
@@ -145,7 +150,7 @@ const updateUserProfile =
          const config = {
             headers: {
                "Content-type": "application/json",
-               Authorization: `Bearer ${userInfo.token}`, //using the token here
+               Authorization: `Bearer ${userInfo?.token}`, //using the token here
             },
          };
          // gettig the details that we will display after we update the profile
@@ -165,39 +170,41 @@ const updateUserProfile =
       }
    };
 
-const listUsers = () => async (dispatch: Dispatch<UsersListDispatchType>, getState: any) => {
-   try {
-      dispatch({
-         type: actionTypes.USER_LIST_REQUEST,
-      });
-      const {
-         userLogin: { userInfo },
-      } = getState();
+const listUsers =
+   () => async (dispatch: Dispatch<UsersListDispatchType>, getState: () => ApplicationState) => {
+      try {
+         dispatch({
+            type: actionTypes.USER_LIST_REQUEST,
+         });
+         const {
+            userLogin: { userInfo },
+         } = getState();
 
-      //Using this for authorization : sending the header
-      const config = {
-         headers: {
-            Authorization: `Bearer ${userInfo.token}`, //using the token here
-         },
-      };
-      const { data } = await axios.get(`/api/users`, config);
-      dispatch({
-         type: actionTypes.USER_LIST_SUCCESS,
-         payload: data,
-      });
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.USER_LIST_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+         //Using this for authorization : sending the header
+         const config = {
+            headers: {
+               Authorization: `Bearer ${userInfo?.token}`, //using the token here
+            },
+         };
+         const { data } = await axios.get(`/api/users`, config);
+         dispatch({
+            type: actionTypes.USER_LIST_SUCCESS,
+            payload: data,
+         });
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.USER_LIST_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
 const deleteUser =
-   (id: any) => async (dispatch: Dispatch<UserDeleteDispatchType>, getState: any) => {
+   (id: any) =>
+   async (dispatch: Dispatch<UserDeleteDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
             type: actionTypes.USER_DELETE_REQUEST,
@@ -209,7 +216,7 @@ const deleteUser =
          //Using this for authorization : sending the header
          const config = {
             headers: {
-               Authorization: `Bearer ${userInfo.token}`, //using the token here
+               Authorization: `Bearer ${userInfo?.token}`, //using the token here
             },
          };
          await axios.delete(`/api/users/${id}`, config);
@@ -229,7 +236,8 @@ const deleteUser =
 
 //
 const updateUser =
-   (user: any) => async (dispatch: Dispatch<UserUpdateDispatchType>, getState: any) => {
+   (user: any) =>
+   async (dispatch: Dispatch<UserUpdateDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
             type: actionTypes.USER_UPDATE_REQUEST,
@@ -242,7 +250,7 @@ const updateUser =
          const config = {
             headers: {
                "Content-type": "application/json",
-               Authorization: `Bearer ${userInfo.token}`, //using the token here
+               Authorization: `Bearer ${userInfo?.token}`, //using the token here
             },
          };
          const { data } = await axios.put(`/api/users/${user._id}`, user, config);

@@ -31,15 +31,14 @@ export interface IOrderItem {
 }
 
 export interface IUser {
-   _id?: string;
-   isAdmin: boolean;
+   id?: string;
    name: string;
    email: string;
    password: string;
 }
 
 export interface IUserResponseDetails {
-   id: string;
+   _id?: string;
    name: string;
    email: string;
    isAdmin: boolean;
