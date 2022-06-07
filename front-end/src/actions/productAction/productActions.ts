@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ApplicationState } from "store";
+import { IProduct, IReview, IUpdateProductRequest } from "types";
 import * as actionTypes from "../../actionTypes";
 import {
    CreateProductDispatchType,
@@ -32,24 +33,25 @@ const listProduct =
    };
 
 // action for getting a single product that we click on
-const listProductDetails = (id: any) => async (dispatch: Dispatch<ProductDetailsDispatchType>) => {
-   try {
-      dispatch({ type: actionTypes.PRODUCT_DETAILS_REQUEST });
-      const { data } = await axios.get(`/api/products/${id}`);
-      dispatch({ type: actionTypes.PRODUCT_DETAILS_SUCCESS, payload: data });
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.PRODUCT_DETAILS_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+const listProductDetails =
+   (id: string) => async (dispatch: Dispatch<ProductDetailsDispatchType>) => {
+      try {
+         dispatch({ type: actionTypes.PRODUCT_DETAILS_REQUEST });
+         const { data } = await axios.get(`/api/products/${id}`);
+         dispatch({ type: actionTypes.PRODUCT_DETAILS_SUCCESS, payload: data });
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.PRODUCT_DETAILS_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
 const deleteProduct =
-   (id: any) =>
+   (id: string) =>
    async (dispatch: Dispatch<DeleteProductDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_DELETE_REQUEST });
@@ -102,7 +104,7 @@ const createProduct =
    };
 
 const updateProduct =
-   (product: any) =>
+   (product: IUpdateProductRequest) =>
    async (dispatch: Dispatch<UpdateProductDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_UPDATE_REQUEST });
@@ -130,7 +132,7 @@ const updateProduct =
    };
 
 const createProductReview =
-   (productId: any, review: any) =>
+   (productId: string, review: IReview) =>
    async (
       dispatch: Dispatch<CreateProductReviewDispatchType>,
       getState: () => ApplicationState

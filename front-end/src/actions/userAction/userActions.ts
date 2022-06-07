@@ -203,7 +203,7 @@ const listUsers =
    };
 
 const deleteUser =
-   (id: any) =>
+   (id: string) =>
    async (dispatch: Dispatch<UserDeleteDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
@@ -236,7 +236,7 @@ const deleteUser =
 
 //
 const updateUser =
-   (user: any) =>
+   (user: IUserResponseDetails) =>
    async (dispatch: Dispatch<UserUpdateDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({

@@ -1,6 +1,6 @@
 export interface IReview {
    _id?: string;
-   name: string;
+   name?: string;
    rating: number;
    comment: string;
 }
@@ -58,6 +58,17 @@ export interface IProduct {
    category: string;
    user: string;
    review?: IReview[];
+}
+
+export interface IUpdateProductRequest {
+   _id: string;
+   name: string;
+   price: number;
+   image: string;
+   brand: string;
+   category: string;
+   countInStock: number;
+   description: string;
 }
 
 export interface IOrder {

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ApplicationState } from "store";
+import { ICreateOrder, IOrder } from "types";
 import * as actionTypes from "../../actionTypes";
 import {
    CreateOrderDispatchType,
@@ -12,7 +13,7 @@ import {
 } from "./orderActionTypes";
 
 const createOrder =
-   (order: any) =>
+   (order: ICreateOrder) =>
    async (dispatch: Dispatch<CreateOrderDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
@@ -45,7 +46,7 @@ const createOrder =
    };
 
 const getOrderDetails =
-   (id: any) =>
+   (id: string) =>
    async (dispatch: Dispatch<GetOrderDetailsDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
@@ -77,7 +78,7 @@ const getOrderDetails =
    };
 
 const payOrder =
-   (orderId: any, paymentResult: any) =>
+   (orderId: string, paymentResult: string) =>
    async (dispatch: Dispatch<OrderPayDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
@@ -110,7 +111,7 @@ const payOrder =
    };
 
 const deliverOrder =
-   (id: any) =>
+   (id: string) =>
    async (dispatch: Dispatch<OrderDeliverDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({
