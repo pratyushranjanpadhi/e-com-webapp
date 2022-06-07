@@ -118,7 +118,7 @@ const productUpdateReducer = (
       case actionTypes.PRODUCT_UPDATE_FAIL:
          return { loading: false, error: action.payload };
       case actionTypes.PRODUCT_UPDATE_RESET:
-         return { product: {} };
+         return { product: state.product };
       default:
          return state;
    }

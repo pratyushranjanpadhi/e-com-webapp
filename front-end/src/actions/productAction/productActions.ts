@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { ApplicationState } from "store";
+import { IProduct, IReview, IUpdateProductRequest } from "types";
 import * as actionTypes from "../../actionTypes";
 import {
    CreateProductDispatchType,
@@ -31,24 +33,26 @@ const listProduct =
    };
 
 // action for getting a single product that we click on
-const listProductDetails = (id: any) => async (dispatch: Dispatch<ProductDetailsDispatchType>) => {
-   try {
-      dispatch({ type: actionTypes.PRODUCT_DETAILS_REQUEST });
-      const { data } = await axios.get(`/api/products/${id}`);
-      dispatch({ type: actionTypes.PRODUCT_DETAILS_SUCCESS, payload: data });
-   } catch (error: any) {
-      dispatch({
-         type: actionTypes.PRODUCT_DETAILS_FAIL,
-         payload:
-            error.response && error.response.data.message
-               ? error.response.data.message
-               : error.message,
-      });
-   }
-};
+const listProductDetails =
+   (id: string) => async (dispatch: Dispatch<ProductDetailsDispatchType>) => {
+      try {
+         dispatch({ type: actionTypes.PRODUCT_DETAILS_REQUEST });
+         const { data } = await axios.get(`/api/products/${id}`);
+         dispatch({ type: actionTypes.PRODUCT_DETAILS_SUCCESS, payload: data });
+      } catch (error: any) {
+         dispatch({
+            type: actionTypes.PRODUCT_DETAILS_FAIL,
+            payload:
+               error.response && error.response.data.message
+                  ? error.response.data.message
+                  : error.message,
+         });
+      }
+   };
 
 const deleteProduct =
-   (id: any) => async (dispatch: Dispatch<DeleteProductDispatchType>, getState: any) => {
+   (id: string) =>
+   async (dispatch: Dispatch<DeleteProductDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_DELETE_REQUEST });
          const {
@@ -56,7 +60,7 @@ const deleteProduct =
          } = getState();
          const config = {
             headers: {
-               Authorization: `Bearer ${userInfo.token}`,
+               Authorization: `Bearer ${userInfo?.token}`,
             },
          };
          axios.delete(`/api/products/${id}`, config);
@@ -73,7 +77,8 @@ const deleteProduct =
    };
 
 const createProduct =
-   () => async (dispatch: Dispatch<CreateProductDispatchType>, getState: any) => {
+   () =>
+   async (dispatch: Dispatch<CreateProductDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_CREATE_REQUEST });
          const {
@@ -81,7 +86,7 @@ const createProduct =
          } = getState();
          const config = {
             headers: {
-               Authorization: `Bearer ${userInfo.token}`,
+               Authorization: `Bearer ${userInfo?.token}`,
             },
          };
 
@@ -99,7 +104,8 @@ const createProduct =
    };
 
 const updateProduct =
-   (product: any) => async (dispatch: Dispatch<UpdateProductDispatchType>, getState: any) => {
+   (product: IUpdateProductRequest) =>
+   async (dispatch: Dispatch<UpdateProductDispatchType>, getState: () => ApplicationState) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_UPDATE_REQUEST });
          const {
@@ -108,7 +114,7 @@ const updateProduct =
          const config = {
             headers: {
                "Content-type": "application/json",
-               Authorization: `Bearer ${userInfo.token}`,
+               Authorization: `Bearer ${userInfo?.token}`,
             },
          };
 
@@ -126,8 +132,11 @@ const updateProduct =
    };
 
 const createProductReview =
-   (productId: any, review: any) =>
-   async (dispatch: Dispatch<CreateProductReviewDispatchType>, getState: any) => {
+   (productId: string, review: IReview) =>
+   async (
+      dispatch: Dispatch<CreateProductReviewDispatchType>,
+      getState: () => ApplicationState
+   ) => {
       try {
          dispatch({ type: actionTypes.PRODUCT_CREATE_REVIEW_REQUEST });
          const {
@@ -136,7 +145,7 @@ const createProductReview =
          const config = {
             headers: {
                "Content-type": "application/json",
-               Authorization: `Bearer ${userInfo.token}`,
+               Authorization: `Bearer ${userInfo?.token}`,
             },
          };
 

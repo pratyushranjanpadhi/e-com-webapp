@@ -1,6 +1,6 @@
 export interface IReview {
    _id?: string;
-   name: string;
+   name?: string;
    rating: number;
    comment: string;
 }
@@ -31,18 +31,17 @@ export interface IOrderItem {
 }
 
 export interface IUser {
-   _id?: string;
-   isAdmin: boolean;
+   id?: string;
    name: string;
    email: string;
    password: string;
 }
 
 export interface IUserResponseDetails {
-   id: string;
+   _id?: string;
    name: string;
-   emdil: string;
-   isAdming: boolean;
+   email: string;
+   isAdmin: boolean;
    token?: string;
 }
 
@@ -59,6 +58,17 @@ export interface IProduct {
    category: string;
    user: string;
    review?: IReview[];
+}
+
+export interface IUpdateProductRequest {
+   _id: string;
+   name: string;
+   price: number;
+   image: string;
+   brand: string;
+   category: string;
+   countInStock: number;
+   description: string;
 }
 
 export interface IOrder {
