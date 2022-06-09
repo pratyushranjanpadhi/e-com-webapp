@@ -27,6 +27,8 @@ const OrderScreen: React.FC<Props> = ({ history, match }) => {
 
    const { order, loading, error } = useSelector((state: any) => state.orderDetails);
 
+   console.log(order);
+
    const orderDeliver = useSelector((state: any) => state.orderDeliver);
    const { loading: deliverLoading, success: deliverSuccess } = orderDeliver;
 
