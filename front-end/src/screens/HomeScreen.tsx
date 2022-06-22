@@ -7,6 +7,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import MyPagination from "../components/MyPagination";
 import Slider from "../components/Slider";
+import { IProduct } from "types";
 
 interface Props {
    match: any;
@@ -33,7 +34,7 @@ const HomeScreen: React.FC<Props> = ({ match }) => {
          ) : (
             <>
                <Row>
-                  {products.map((product: any) => (
+                  {products.map((product: IProduct) => (
                      <Col key={product._id} sm={12} md={6} lg={3}>
                         <Product product={product} />
                      </Col>

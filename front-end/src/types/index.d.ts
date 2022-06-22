@@ -79,7 +79,7 @@ export interface IOrder {
    isPaid: boolean;
    isDelivered: boolean;
    orderItems: IOrderItem[];
-   user: IUser;
+   user: string;
    paymentMethod: string;
    paidAt?: Date;
    deliveredAt?: Date;
@@ -91,10 +91,17 @@ export interface ICreateOrder {
    orderItems: ICartItem[];
    shippingAddress: IShippingAddress;
    paymentMethod: IPaymentMethod;
-   itemsPrice: number;
-   shippingPrice: number;
-   taxPrice: number;
-   totalPrice: number;
+   itemsPrice: string;
+   shippingPrice: string;
+   taxPrice: string;
+   totalPrice: string;
+   //  orderItems,
+   //  shippingAddress,
+   //  paymentMethod,
+   //  itemsPrice,
+   //  taxPrice,
+   //  shippingPrice,
+   //  totalPrice,
 }
 
 export interface ICartItem {
