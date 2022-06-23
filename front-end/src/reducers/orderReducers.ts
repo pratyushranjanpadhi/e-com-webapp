@@ -26,6 +26,12 @@ const orderDetailsDefaultState: IOrderDetailsState = {
       orderItems: [],
       user: "",
       paymentMethod: "",
+      shippingAddress: {
+         address: "",
+         city: "",
+         postalCode: "",
+         country: "",
+      },
    },
 };
 

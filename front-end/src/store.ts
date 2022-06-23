@@ -100,7 +100,7 @@ const reducer = combineReducers({
    myOrderList: myOrderListReducer,
    orderList: orderListReducer,
 });
-console.log();
+
 const cartItemsFromStorage: ICartItem[] = localStorage.getItem("cartItems")
    ? JSON.parse(localStorage.getItem("cartItems") || "")
    : [];

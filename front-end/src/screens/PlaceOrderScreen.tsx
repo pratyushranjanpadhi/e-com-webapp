@@ -12,7 +12,6 @@ interface Props {
 const PlaceOrderScreen: React.FC<Props> = ({ history }) => {
    const cart = useSelector((state: any) => state.cart);
    const { cartItems, shippingAddress, paymentMethod } = cart;
-   console.log(shippingAddress);
    //Price Calculation
    const addDecimals = (num: any) => {
       return (Math.round(num * 100) / 100).toFixed(2);
