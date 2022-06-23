@@ -2,17 +2,15 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../actions/cartAction/cartAction";
 import { Row, Col, ListGroup, Button, Image, Form, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import Message from "../components/Message";
 
-interface Props {
-   match: any;
-   location: any;
-   history: any;
-}
+const CartScreen: React.FC = () => {
+   const { id } = useParams<{ id?: string }>();
+   const history = useHistory();
+   const location = useLocation();
 
-const CartScreen: React.FC<Props> = ({ match, location, history }) => {
-   const producId = match.params.id;
+   const producId = id;
    const quantity = location.search ? Number(location.search.split("=")[1]) : 1;
 
    const dispatch = useDispatch();

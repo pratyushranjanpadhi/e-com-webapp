@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Image, ListGroup, Row, Col, Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import Rating from "../components/Rating";
 import { createProductReview, listProductDetails } from "../actions/productAction/productActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,12 +8,9 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import * as actionTypes from "../actionTypes";
 
-interface Props {
-   history: any;
-   match: any;
-}
-
-const ProductScreen: React.FC<Props> = ({ history, match }) => {
+const ProductScreen: React.FC = () => {
+   const { id } = useParams<{ id: string }>();
+   const history = useHistory();
    const [quantity, setQuantity] = useState(1);
    const [rating, setRating] = useState(0);
    const [comment, setComment] = useState("");
@@ -40,16 +37,16 @@ const ProductScreen: React.FC<Props> = ({ history, match }) => {
          setComment("");
          dispatch({ type: actionTypes.PRODUCT_CREATE_REVIEW_RESET });
       }
-      dispatch(listProductDetails(match.params.id));
-   }, [dispatch, match, reviewSuccess]);
+      dispatch(listProductDetails(id));
+   }, [dispatch, id, reviewSuccess]);
 
    const addToCartHandler = () => {
-      history.push(`/cart/${match.params.id}?quantity=${quantity}`);
+      history.push(`/cart/${id}?quantity=${quantity}`);
    };
 
    const submitHandler = (e: any) => {
       e.preventDefault();
-      dispatch(createProductReview(match.params.id, { rating, comment }));
+      dispatch(createProductReview(id, { rating, comment }));
    };
 
    return (

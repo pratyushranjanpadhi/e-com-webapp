@@ -4,11 +4,10 @@ import { Button, Form } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../actions/cartAction/cartAction";
+import { useHistory } from "react-router-dom";
 
-interface Props {
-   history: any;
-}
-const ShippingScreen: React.FC<Props> = ({ history }) => {
+const ShippingScreen: React.FC = () => {
+   const history = useHistory();
    const cart = useSelector((state: any) => state.cart);
    const { shippingAddress } = cart;
    const [address, setAddress] = useState(shippingAddress.address);

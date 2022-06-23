@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { login } from "../actions/userAction/userActions";
@@ -7,12 +7,10 @@ import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
-interface Props {
-   location: any;
-   history: any;
-}
+const LoginScreen: React.FC = () => {
+   const location = useLocation();
+   const history = useHistory();
 
-const LoginScreen: React.FC<Props> = ({ location, history }) => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const dispatch = useDispatch();

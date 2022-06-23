@@ -7,13 +7,11 @@ import Message from "../components/Message";
 import { deleteProduct, listProduct, createProduct } from "../actions/productAction/productActions";
 import * as actionTypes from "../actionTypes";
 import MyPagination from "../components/MyPagination";
+import { useHistory, useParams } from "react-router-dom";
 
-interface Props {
-   history: any;
-   match: any;
-}
-const ProductListScreen: React.FC<Props> = ({ history, match }) => {
-   const pageNumber = match.params.page || 1;
+const ProductListScreen: React.FC = () => {
+   const { page: pageNumber } = useParams<{ page: string }>();
+   const history = useHistory();
    const dispatch = useDispatch();
    const productList = useSelector((state: any) => state.productList);
    const { loading, error, products, page, totalPages } = productList;

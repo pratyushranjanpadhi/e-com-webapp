@@ -8,14 +8,11 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { deliverOrder, getOrderDetails, payOrder } from "../actions/orderAction/orderActions";
 import * as actionTypes from "../actionTypes";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 
-interface Props {
-   history: any;
-   match: any;
-}
-
-const OrderScreen: React.FC<Props> = ({ history, match }) => {
-   const orderId = match.params.id;
+const OrderScreen: React.FC = () => {
+   const { id: orderId } = useParams<{ id: string }>();
+   const history = useHistory();
 
    const [isSdkReady, setIsSdkReady] = useState(false);
 

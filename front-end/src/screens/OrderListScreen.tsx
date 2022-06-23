@@ -5,12 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listAllOrders } from "../actions/orderAction/orderActions";
+import { useHistory } from "react-router-dom";
 
-interface Props {
-   history: any;
-}
-
-const OrderListScreen: React.FC<Props> = ({ history }) => {
+const OrderListScreen: React.FC = () => {
+   const history = useHistory();
    const dispatch = useDispatch();
 
    const orderList = useSelector((state: any) => state.orderList);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
@@ -8,13 +8,9 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUser } from "../actions/userAction/userActions";
 import * as actionTypes from "../actionTypes";
 
-interface Props {
-   match: any;
-   history: any;
-}
-
-const UserEditScreen: React.FC<Props> = ({ match, history }) => {
-   const userId = match.params.id;
+const UserEditScreen: React.FC = () => {
+   const { id: userId } = useParams<{ id: string }>();
+   const history = useHistory();
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
    const [isAdmin, setIsAdmin] = useState(false);
