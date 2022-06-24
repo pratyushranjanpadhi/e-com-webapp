@@ -8,14 +8,11 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { deliverOrder, getOrderDetails, payOrder } from "../actions/orderAction/orderActions";
 import * as actionTypes from "../actionTypes";
+import { useParams, useHistory } from "react-router-dom";
 
-interface Props {
-   history: any;
-   match: any;
-}
-
-const OrderScreen: React.FC<Props> = ({ history, match }) => {
-   const orderId = match.params.id;
+const OrderScreen: React.FC = () => {
+   const { id: orderId } = useParams<{ id: string }>();
+   const history = useHistory();
 
    const [isSdkReady, setIsSdkReady] = useState(false);
 
@@ -48,7 +45,7 @@ const OrderScreen: React.FC<Props> = ({ history, match }) => {
          document.body.appendChild(script);
       };
 
-      if (!order || paySuccess || deliverSuccess) {
+      if (order.orderItems.length < 1 || paySuccess || deliverSuccess) {
          dispatch({ type: actionTypes.ORDER_PAY_RESET });
          dispatch({ type: actionTypes.ORDER_DELIVER_RESET });
          dispatch(getOrderDetails(orderId));
@@ -59,7 +56,7 @@ const OrderScreen: React.FC<Props> = ({ history, match }) => {
             setIsSdkReady(true);
          }
       }
-   }, [dispatch, orderId, order, paySuccess, deliverSuccess]);
+   }, [dispatch, orderId, order, paySuccess, deliverSuccess, history, userInfo]);
 
    const paymentSuccessHandler = (paymentResult: any) => {
       dispatch(payOrder(orderId, paymentResult));

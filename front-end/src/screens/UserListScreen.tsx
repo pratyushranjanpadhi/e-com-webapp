@@ -5,11 +5,10 @@ import { Table, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { listUsers, deleteUser } from "../actions/userAction/userActions";
+import { useHistory } from "react-router-dom";
 
-interface Props {
-   history: any;
-}
-const UserListScreen: React.FC<Props> = ({ history }) => {
+const UserListScreen: React.FC = () => {
+   const history = useHistory();
    const dispatch = useDispatch();
    const userList = useSelector((state: any) => state.userList);
    const { loading, error, users } = userList;

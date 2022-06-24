@@ -24,12 +24,14 @@ const orderDetailsDefaultState: IOrderDetailsState = {
       isPaid: false,
       isDelivered: false,
       orderItems: [],
-      user: {
-         name: "",
-         email: "",
-         password: "",
-      },
+      user: "",
       paymentMethod: "",
+      shippingAddress: {
+         address: "",
+         city: "",
+         postalCode: "",
+         country: "",
+      },
    },
 };
 

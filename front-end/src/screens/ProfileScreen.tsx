@@ -6,13 +6,10 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userAction/userActions";
 import { listMyOrders } from "../actions/orderAction/orderActions";
+import { useHistory } from "react-router-dom";
 
-interface Props {
-   location: any;
-   history: any;
-}
-
-const ProfileScreen: React.FC<Props> = ({ location, history }) => {
+const ProfileScreen: React.FC = () => {
+   const history = useHistory();
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");

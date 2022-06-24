@@ -2,8 +2,8 @@ import React from "react";
 import { Pagination } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 interface Props {
-   pages: any;
-   page: any;
+   pages: number;
+   page: number;
    isAdmin?: boolean;
 }
 const MyPagination: React.FC<Props> = ({ pages, page, isAdmin = false }) => {

@@ -7,13 +7,12 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import MyPagination from "../components/MyPagination";
 import Slider from "../components/Slider";
+import { IProduct } from "types";
+import { useParams } from "react-router-dom";
 
-interface Props {
-   match: any;
-}
-
-const HomeScreen: React.FC<Props> = ({ match }) => {
-   const pageNumber = match.params.page || 1;
+const HomeScreen: React.FC = () => {
+   const params = useParams<{ page?: string }>();
+   const pageNumber = params.page || "1";
    const dispatch = useDispatch();
 
    const productList = useSelector((state: any) => state.productList);
@@ -33,7 +32,7 @@ const HomeScreen: React.FC<Props> = ({ match }) => {
          ) : (
             <>
                <Row>
-                  {products.map((product: any) => (
+                  {products.map((product: IProduct) => (
                      <Col key={product._id} sm={12} md={6} lg={3}>
                         <Product product={product} />
                      </Col>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
@@ -9,13 +9,9 @@ import Loader from "../components/Loader";
 import { listProductDetails, updateProduct } from "../actions/productAction/productActions";
 import * as actionTypes from "../actionTypes";
 
-interface Props {
-   match: any;
-   history: any;
-}
-
-const ProductEditScreen: React.FC<Props> = ({ match, history }) => {
-   const productId = match.params.id;
+const ProductEditScreen: React.FC = () => {
+   const { id: productId } = useParams<{ id: string }>();
+   const history = useHistory();
 
    const [name, setName] = useState("");
    const [price, setPrice] = useState(0);

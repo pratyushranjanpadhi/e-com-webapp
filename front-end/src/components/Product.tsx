@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Rating from "./Rating";
+import { IProduct } from "types";
 
 interface Props {
-   product: any;
+   product: IProduct;
 }
 
 const Product: React.FC<Props> = ({ product }) => {

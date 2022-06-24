@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button, Col, Row, ListGroup, Image, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder } from "../actions/orderAction/orderActions";
 
-interface Props {
-   history: any;
-}
-const PlaceOrderScreen: React.FC<Props> = ({ history }) => {
+const PlaceOrderScreen: React.FC = () => {
+   const history = useHistory();
    const cart = useSelector((state: any) => state.cart);
    const { cartItems, shippingAddress, paymentMethod } = cart;
-
    //Price Calculation
    const addDecimals = (num: any) => {
       return (Math.round(num * 100) / 100).toFixed(2);

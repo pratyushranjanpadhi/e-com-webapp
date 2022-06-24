@@ -4,12 +4,10 @@ import { Button, Form, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { savePaymentMethod } from "../actions/cartAction/cartAction";
+import { useHistory } from "react-router-dom";
 
-interface Props {
-   history: any;
-}
-
-const PaymentScreen: React.FC<Props> = ({ history }) => {
+const PaymentScreen: React.FC = () => {
+   const history = useHistory();
    const cart = useSelector((state: any) => state.cart);
    const { shippingAddress } = cart;
    if (!shippingAddress) {
