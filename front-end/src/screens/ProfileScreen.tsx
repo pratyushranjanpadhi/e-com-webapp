@@ -6,10 +6,9 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userAction/userActions";
 import { listMyOrders } from "../actions/orderAction/orderActions";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ProfileScreen: React.FC = () => {
-   const location = useLocation();
    const history = useHistory();
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");

@@ -8,7 +8,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { deliverOrder, getOrderDetails, payOrder } from "../actions/orderAction/orderActions";
 import * as actionTypes from "../actionTypes";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const OrderScreen: React.FC = () => {
    const { id: orderId } = useParams<{ id: string }>();

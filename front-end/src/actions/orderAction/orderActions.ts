@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ApplicationState } from "store";
-import { ICreateOrder, IOrder } from "types";
+import { ICreateOrder } from "types";
 import * as actionTypes from "../../actionTypes";
 import {
    CreateOrderDispatchType,
