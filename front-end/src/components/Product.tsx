@@ -19,7 +19,7 @@ const Product: React.FC<Props> = ({ product }) => {
             <Link to={`/products/${product._id}`}>
                <Card.Title as="div">{product.name}</Card.Title>
             </Link>
-            <Card.Text as="h2">${product.price}</Card.Text>
+            <Card.Text as="h2">₹{product.price}</Card.Text>
             <Card.Text as="div">
                <Rating rating={product.rating} details={`from ${product.numReviews} reviews`} />
             </Card.Text>
