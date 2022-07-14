@@ -136,19 +136,19 @@ const OrderScreen: React.FC = () => {
                      <ListGroup.Item>
                         <Row>
                            <Col>Items</Col>
-                           <Col>${order.itemsPrice}</Col>
+                           <Col>₹{order.itemsPrice}</Col>
                         </Row>
                      </ListGroup.Item>
                      <ListGroup.Item>
                         <Row>
                            <Col>Shipping</Col>
-                           <Col>${order.shippingPrice}</Col>
+                           <Col>₹{order.shippingPrice}</Col>
                         </Row>
                      </ListGroup.Item>
                      <ListGroup.Item>
                         <Row>
                            <Col>Tax</Col>
-                           <Col>${order.taxPrice}</Col>
+                           <Col>₹{order.taxPrice}</Col>
                         </Row>
                      </ListGroup.Item>
                      <ListGroup.Item>

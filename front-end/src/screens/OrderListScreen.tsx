@@ -49,7 +49,7 @@ const OrderListScreen: React.FC = () => {
                      <tr key={order._id}>
                         <td>{order._id}</td>
                         <td>{order.user && order.user.name}</td>
-                        <td>${order.totalPrice}</td>
+                        <td>₹{order.totalPrice}</td>
                         <td>
                            {order.isPaid ? (
                               order.paidAt.substring(0, 10)
