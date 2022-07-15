@@ -17,7 +17,7 @@ const Header: React.FC = () => {
          <Navbar bg="info" className="py-3" expand="lg">
             <Container>
                <LinkContainer to="/">
-                  <Navbar.Brand>ShopOn</Navbar.Brand>
+                  <Navbar.Brand>Shoptex</Navbar.Brand>
                </LinkContainer>
 
                <Navbar.Toggle aria-controls="basic-navbar-nav" />
