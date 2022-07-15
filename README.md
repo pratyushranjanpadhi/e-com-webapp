@@ -1,5 +1,12 @@
 # Shoptex ( E-com web application)
 
+<img src="./images/js.png" alt="javascript" width="40"/>&nbsp;&nbsp;&nbsp;
+<img src="./images/typescript.png" alt="typescript" width="40"/>&nbsp;&nbsp;&nbsp;
+<img src="./images/react.png" alt="react" width="40"/>&nbsp;&nbsp;&nbsp;
+<img src="./images/redux.png" alt="redux" width="40"/>&nbsp;&nbsp;&nbsp;
+<img src="./images/mongodb.png" alt="mongodb" width="40"/>&nbsp;&nbsp;&nbsp;
+<img src="./images/bootstrap.png" alt="bootstrap" width="40"/>&nbsp;&nbsp;&nbsp;
+
 ### Live here : [shoptex.herokuapp.com](https://shoptex.herokuapp.com/)
 
 This is an e-commerce web application , a fun personal project built with MERN stack. This application has almost all the features which most of the modern e-com websites have, like cart, payment, authentication, different level of authorization(users, admin) and localstorage support for saving cart info, shipping address info etc.
@@ -8,6 +15,7 @@ Play with it by creating an account and complete till the payment.
 For payment, use the paypal sandbox account if you have or else you can test with the following :
 
 > email :
+
 > password :
 
 ## Features available
@@ -36,6 +44,8 @@ For payment, use the paypal sandbox account if you have or else you can test wit
 ```
 $ git clone ["git id"]
 $ cd e-com-webapp
+$ npm install
+$ cd frontend
 $ npm install
 setup the environment variables (listed below)
 $ npm run dev
